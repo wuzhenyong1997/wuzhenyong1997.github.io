@@ -5,9 +5,9 @@
   <subtitle>Good Good Study</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://www.ggstu.com/"/>
+  <link href="https://www.ggstu.com/wuzhenyong1997/"/>
   <updated>2018-08-19T14:25:31.917Z</updated>
-  <id>https://www.ggstu.com/</id>
+  <id>https://www.ggstu.com/wuzhenyong1997/</id>
   
   <author>
     <name>Wu Zhenyong</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Scala中的继承</title>
-    <link href="https://www.ggstu.com/2018/08/19/Scala%E4%B8%AD%E7%9A%84%E7%BB%A7%E6%89%BF/"/>
-    <id>https://www.ggstu.com/2018/08/19/Scala中的继承/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/19/Scala%E4%B8%AD%E7%9A%84%E7%BB%A7%E6%89%BF/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/19/Scala中的继承/</id>
     <published>2018-08-19T11:36:56.000Z</published>
     <updated>2018-08-19T14:25:31.917Z</updated>
     
@@ -31,17 +31,17 @@
     
     </summary>
     
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+      <category term="技术文章" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+      <category term="Scala" scheme="https://www.ggstu.com/wuzhenyong1997/tags/Scala/"/>
     
   </entry>
   
   <entry>
     <title>Scala的apply方法</title>
-    <link href="https://www.ggstu.com/2018/08/19/Scala%E7%9A%84apply%E6%96%B9%E6%B3%95/"/>
-    <id>https://www.ggstu.com/2018/08/19/Scala的apply方法/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/19/Scala%E7%9A%84apply%E6%96%B9%E6%B3%95/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/19/Scala的apply方法/</id>
     <published>2018-08-19T06:43:19.000Z</published>
     <updated>2018-08-19T14:19:53.025Z</updated>
     
@@ -53,17 +53,17 @@
     
     </summary>
     
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+      <category term="技术文章" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+      <category term="Scala" scheme="https://www.ggstu.com/wuzhenyong1997/tags/Scala/"/>
     
   </entry>
   
   <entry>
     <title>Scala的object对象</title>
-    <link href="https://www.ggstu.com/2018/08/19/Scala%E7%9A%84object%E5%AF%B9%E8%B1%A1/"/>
-    <id>https://www.ggstu.com/2018/08/19/Scala的object对象/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/19/Scala%E7%9A%84object%E5%AF%B9%E8%B1%A1/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/19/Scala的object对象/</id>
     <published>2018-08-19T05:59:59.000Z</published>
     <updated>2018-08-19T14:18:12.522Z</updated>
     
@@ -75,17 +75,17 @@
     
     </summary>
     
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+      <category term="技术文章" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+      <category term="Scala" scheme="https://www.ggstu.com/wuzhenyong1997/tags/Scala/"/>
     
   </entry>
   
   <entry>
     <title>老街</title>
-    <link href="https://www.ggstu.com/2018/08/18/%E8%80%81%E8%A1%97/"/>
-    <id>https://www.ggstu.com/2018/08/18/老街/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/18/%E8%80%81%E8%A1%97/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/18/老街/</id>
     <published>2018-08-18T14:09:27.000Z</published>
     <updated>2018-08-19T07:20:46.724Z</updated>
     
@@ -97,17 +97,17 @@
     
     </summary>
     
-      <category term="随便说说" scheme="https://www.ggstu.com/categories/%E9%9A%8F%E4%BE%BF%E8%AF%B4%E8%AF%B4/"/>
+      <category term="随便说说" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E9%9A%8F%E4%BE%BF%E8%AF%B4%E8%AF%B4/"/>
     
     
-      <category term="心情" scheme="https://www.ggstu.com/tags/%E5%BF%83%E6%83%85/"/>
+      <category term="心情" scheme="https://www.ggstu.com/wuzhenyong1997/tags/%E5%BF%83%E6%83%85/"/>
     
   </entry>
   
   <entry>
     <title>Scala的类和对象</title>
-    <link href="https://www.ggstu.com/2018/08/18/Scala%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/"/>
-    <id>https://www.ggstu.com/2018/08/18/Scala的类和对象/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/18/Scala%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/18/Scala的类和对象/</id>
     <published>2018-08-18T09:33:16.000Z</published>
     <updated>2018-08-19T14:00:40.823Z</updated>
     
@@ -119,17 +119,17 @@
     
     </summary>
     
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+      <category term="技术文章" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+      <category term="Scala" scheme="https://www.ggstu.com/wuzhenyong1997/tags/Scala/"/>
     
   </entry>
   
   <entry>
     <title>Scala中的元祖</title>
-    <link href="https://www.ggstu.com/2018/08/18/Scala%E4%B8%AD%E7%9A%84%E5%85%83%E7%A5%96/"/>
-    <id>https://www.ggstu.com/2018/08/18/Scala中的元祖/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/18/Scala%E4%B8%AD%E7%9A%84%E5%85%83%E7%A5%96/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/18/Scala中的元祖/</id>
     <published>2018-08-18T08:47:10.000Z</published>
     <updated>2018-08-18T09:20:16.600Z</updated>
     
@@ -141,17 +141,17 @@
     
     </summary>
     
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+      <category term="技术文章" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+      <category term="Scala" scheme="https://www.ggstu.com/wuzhenyong1997/tags/Scala/"/>
     
   </entry>
   
   <entry>
     <title>七夕的南京刮起了台风</title>
-    <link href="https://www.ggstu.com/2018/08/17/%E4%B8%83%E5%A4%95%E7%9A%84%E5%8D%97%E4%BA%AC%E5%88%AE%E8%B5%B7%E4%BA%86%E5%8F%B0%E9%A3%8E/"/>
-    <id>https://www.ggstu.com/2018/08/17/七夕的南京刮起了台风/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/17/%E4%B8%83%E5%A4%95%E7%9A%84%E5%8D%97%E4%BA%AC%E5%88%AE%E8%B5%B7%E4%BA%86%E5%8F%B0%E9%A3%8E/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/17/七夕的南京刮起了台风/</id>
     <published>2018-08-17T05:02:39.000Z</published>
     <updated>2018-08-17T13:48:55.361Z</updated>
     
@@ -163,17 +163,17 @@
     
     </summary>
     
-      <category term="随便说说" scheme="https://www.ggstu.com/categories/%E9%9A%8F%E4%BE%BF%E8%AF%B4%E8%AF%B4/"/>
+      <category term="随便说说" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E9%9A%8F%E4%BE%BF%E8%AF%B4%E8%AF%B4/"/>
     
     
-      <category term="心情" scheme="https://www.ggstu.com/tags/%E5%BF%83%E6%83%85/"/>
+      <category term="心情" scheme="https://www.ggstu.com/wuzhenyong1997/tags/%E5%BF%83%E6%83%85/"/>
     
   </entry>
   
   <entry>
     <title>Scala的Map映射</title>
-    <link href="https://www.ggstu.com/2018/08/17/Scala%E7%9A%84Map%E6%98%A0%E5%B0%84/"/>
-    <id>https://www.ggstu.com/2018/08/17/Scala的Map映射/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/17/Scala%E7%9A%84Map%E6%98%A0%E5%B0%84/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/17/Scala的Map映射/</id>
     <published>2018-08-17T02:24:20.000Z</published>
     <updated>2018-08-17T03:12:32.840Z</updated>
     
@@ -185,17 +185,17 @@
     
     </summary>
     
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+      <category term="技术文章" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+      <category term="Scala" scheme="https://www.ggstu.com/wuzhenyong1997/tags/Scala/"/>
     
   </entry>
   
   <entry>
     <title>Scala中的数组</title>
-    <link href="https://www.ggstu.com/2018/08/16/Scala%E4%B8%AD%E7%9A%84%E6%95%B0%E7%BB%84/"/>
-    <id>https://www.ggstu.com/2018/08/16/Scala中的数组/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/16/Scala%E4%B8%AD%E7%9A%84%E6%95%B0%E7%BB%84/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/16/Scala中的数组/</id>
     <published>2018-08-16T13:57:02.000Z</published>
     <updated>2018-08-18T09:20:22.021Z</updated>
     
@@ -207,17 +207,17 @@
     
     </summary>
     
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+      <category term="技术文章" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+      <category term="Scala" scheme="https://www.ggstu.com/wuzhenyong1997/tags/Scala/"/>
     
   </entry>
   
   <entry>
     <title>Scala的异常处理</title>
-    <link href="https://www.ggstu.com/2018/08/16/Scala%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/"/>
-    <id>https://www.ggstu.com/2018/08/16/Scala的异常处理/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/16/Scala%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/16/Scala的异常处理/</id>
     <published>2018-08-16T13:36:00.000Z</published>
     <updated>2018-08-16T13:54:55.841Z</updated>
     
@@ -230,17 +230,17 @@
     
     </summary>
     
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+      <category term="技术文章" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+      <category term="Scala" scheme="https://www.ggstu.com/wuzhenyong1997/tags/Scala/"/>
     
   </entry>
   
   <entry>
     <title>Scala的输入输出</title>
-    <link href="https://www.ggstu.com/2018/08/16/Scala%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/"/>
-    <id>https://www.ggstu.com/2018/08/16/Scala的输入输出/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/16/Scala%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/16/Scala的输入输出/</id>
     <published>2018-08-16T13:02:07.000Z</published>
     <updated>2018-08-16T13:33:55.308Z</updated>
     
@@ -252,17 +252,17 @@
     
     </summary>
     
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+      <category term="技术文章" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+      <category term="Scala" scheme="https://www.ggstu.com/wuzhenyong1997/tags/Scala/"/>
     
   </entry>
   
   <entry>
     <title>Scala的Lazy值</title>
-    <link href="https://www.ggstu.com/2018/08/16/Scala%E7%9A%84Lazy%E5%80%BC/"/>
-    <id>https://www.ggstu.com/2018/08/16/Scala的Lazy值/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/16/Scala%E7%9A%84Lazy%E5%80%BC/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/16/Scala的Lazy值/</id>
     <published>2018-08-16T09:06:58.000Z</published>
     <updated>2018-08-16T02:55:33.430Z</updated>
     
@@ -274,17 +274,17 @@
     
     </summary>
     
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+      <category term="技术文章" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+      <category term="Scala" scheme="https://www.ggstu.com/wuzhenyong1997/tags/Scala/"/>
     
   </entry>
   
   <entry>
     <title>Scala中的函数</title>
-    <link href="https://www.ggstu.com/2018/08/16/Scala%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0/"/>
-    <id>https://www.ggstu.com/2018/08/16/Scala中的函数/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/16/Scala%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/16/Scala中的函数/</id>
     <published>2018-08-16T08:23:09.000Z</published>
     <updated>2018-08-15T09:43:56.656Z</updated>
     
@@ -296,17 +296,17 @@
     
     </summary>
     
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+      <category term="技术文章" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+      <category term="Scala" scheme="https://www.ggstu.com/wuzhenyong1997/tags/Scala/"/>
     
   </entry>
   
   <entry>
     <title>Scala的循环</title>
-    <link href="https://www.ggstu.com/2018/08/16/Scala%E7%9A%84%E5%BE%AA%E7%8E%AF/"/>
-    <id>https://www.ggstu.com/2018/08/16/Scala的循环/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/16/Scala%E7%9A%84%E5%BE%AA%E7%8E%AF/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/16/Scala的循环/</id>
     <published>2018-08-16T01:41:00.000Z</published>
     <updated>2018-08-15T02:27:18.266Z</updated>
     
@@ -318,17 +318,17 @@
     
     </summary>
     
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+      <category term="技术文章" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+      <category term="Scala" scheme="https://www.ggstu.com/wuzhenyong1997/tags/Scala/"/>
     
   </entry>
   
   <entry>
     <title>Scala的条件表达式</title>
-    <link href="https://www.ggstu.com/2018/08/16/Scala%E7%9A%84%E6%9D%A1%E4%BB%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    <id>https://www.ggstu.com/2018/08/16/Scala的条件表达式/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/16/Scala%E7%9A%84%E6%9D%A1%E4%BB%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/16/Scala的条件表达式/</id>
     <published>2018-08-16T01:05:27.000Z</published>
     <updated>2018-08-15T01:35:46.120Z</updated>
     
@@ -340,17 +340,17 @@
     
     </summary>
     
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+      <category term="技术文章" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+      <category term="Scala" scheme="https://www.ggstu.com/wuzhenyong1997/tags/Scala/"/>
     
   </entry>
   
   <entry>
     <title>Scala变量的声明和使用</title>
-    <link href="https://www.ggstu.com/2018/08/15/Scala%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E%E5%92%8C%E4%BD%BF%E7%94%A8/"/>
-    <id>https://www.ggstu.com/2018/08/15/Scala变量的声明和使用/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/15/Scala%E5%8F%98%E9%87%8F%E7%9A%84%E5%A3%B0%E6%98%8E%E5%92%8C%E4%BD%BF%E7%94%A8/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/15/Scala变量的声明和使用/</id>
     <published>2018-08-15T14:26:50.000Z</published>
     <updated>2018-08-15T01:33:36.557Z</updated>
     
@@ -362,17 +362,17 @@
     
     </summary>
     
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+      <category term="技术文章" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+      <category term="Scala" scheme="https://www.ggstu.com/wuzhenyong1997/tags/Scala/"/>
     
   </entry>
   
   <entry>
     <title>Scala常用的数据类型和操作符</title>
-    <link href="https://www.ggstu.com/2018/08/15/Scala%E5%B8%B8%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%93%8D%E4%BD%9C%E7%AC%A6/"/>
-    <id>https://www.ggstu.com/2018/08/15/Scala常用的数据类型和操作符/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/15/Scala%E5%B8%B8%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%93%8D%E4%BD%9C%E7%AC%A6/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/15/Scala常用的数据类型和操作符/</id>
     <published>2018-08-15T13:28:53.000Z</published>
     <updated>2018-08-15T01:33:17.119Z</updated>
     
@@ -390,17 +390,17 @@
     
     </summary>
     
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+      <category term="技术文章" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+      <category term="Scala" scheme="https://www.ggstu.com/wuzhenyong1997/tags/Scala/"/>
     
   </entry>
   
   <entry>
     <title>Scala解释器的使用</title>
-    <link href="https://www.ggstu.com/2018/08/15/Scala%E8%A7%A3%E9%87%8A%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>https://www.ggstu.com/2018/08/15/Scala解释器的使用/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/15/Scala%E8%A7%A3%E9%87%8A%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/15/Scala解释器的使用/</id>
     <published>2018-08-15T12:52:08.000Z</published>
     <updated>2018-08-15T01:33:05.994Z</updated>
     
@@ -412,17 +412,17 @@
     
     </summary>
     
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+      <category term="技术文章" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+      <category term="Scala" scheme="https://www.ggstu.com/wuzhenyong1997/tags/Scala/"/>
     
   </entry>
   
   <entry>
     <title>Scala在Windows上的安装及环境配置</title>
-    <link href="https://www.ggstu.com/2018/08/15/Scala%E5%9C%A8Windows%E4%B8%8A%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
-    <id>https://www.ggstu.com/2018/08/15/Scala在Windows上的安装及环境配置/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/15/Scala%E5%9C%A8Windows%E4%B8%8A%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/15/Scala在Windows上的安装及环境配置/</id>
     <published>2018-08-15T11:50:02.000Z</published>
     <updated>2018-08-15T01:32:57.938Z</updated>
     
@@ -434,17 +434,17 @@
     
     </summary>
     
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+      <category term="技术文章" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+      <category term="Scala" scheme="https://www.ggstu.com/wuzhenyong1997/tags/Scala/"/>
     
   </entry>
   
   <entry>
     <title>想不到不去健身房的理由</title>
-    <link href="https://www.ggstu.com/2018/08/14/%E6%83%B3%E4%B8%8D%E5%88%B0%E4%B8%8D%E5%8E%BB%E5%81%A5%E8%BA%AB%E6%88%BF%E7%9A%84%E7%90%86%E7%94%B1/"/>
-    <id>https://www.ggstu.com/2018/08/14/想不到不去健身房的理由/</id>
+    <link href="https://www.ggstu.com/wuzhenyong1997/2018/08/14/%E6%83%B3%E4%B8%8D%E5%88%B0%E4%B8%8D%E5%8E%BB%E5%81%A5%E8%BA%AB%E6%88%BF%E7%9A%84%E7%90%86%E7%94%B1/"/>
+    <id>https://www.ggstu.com/wuzhenyong1997/2018/08/14/想不到不去健身房的理由/</id>
     <published>2018-08-14T15:16:59.000Z</published>
     <updated>2018-08-14T12:13:56.333Z</updated>
     
@@ -456,10 +456,10 @@
     
     </summary>
     
-      <category term="随便说说" scheme="https://www.ggstu.com/categories/%E9%9A%8F%E4%BE%BF%E8%AF%B4%E8%AF%B4/"/>
+      <category term="随便说说" scheme="https://www.ggstu.com/wuzhenyong1997/categories/%E9%9A%8F%E4%BE%BF%E8%AF%B4%E8%AF%B4/"/>
     
     
-      <category term="健身" scheme="https://www.ggstu.com/tags/%E5%81%A5%E8%BA%AB/"/>
+      <category term="健身" scheme="https://www.ggstu.com/wuzhenyong1997/tags/%E5%81%A5%E8%BA%AB/"/>
     
   </entry>
   
