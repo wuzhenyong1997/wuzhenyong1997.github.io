@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://www.ggstu.com/2018/08/25/Scala%E6%B3%9B%E5%9E%8B%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%B8%8A%E7%95%8C-Upper-Bounds-%E5%92%8C%E4%B8%8B%E7%95%8C-Lower-Bounds/</loc>
+    <lastmod>2018-08-25T08:21:53.868Z</lastmod>
+    <data>
+        <display>
+        <title>Scala泛型类型的上界(Upper Bounds)和下界(Lower Bounds)</title>
+        <pubTime>2018-08-25T07:18:08.000Z</pubTime>
+        
+        <tag>Scala</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术文章" url="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://www.ggstu.com/2018/08/25/Scala%E7%9A%84%E6%B3%9B%E5%9E%8B%E7%B1%BB%E5%92%8C%E6%B3%9B%E5%9E%8B%E5%87%BD%E6%95%B0/</loc>
     <lastmod>2018-08-25T07:06:36.829Z</lastmod>
     <data>
