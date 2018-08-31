@@ -4,12 +4,12 @@
 
     
   <url>
-    <loc>https://www.ggstu.com/2018/08/31/Hadoop2-X%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%80%EF%BC%89%E5%87%86%E5%A4%87%E9%98%B6%E6%AE%B5/</loc>
-    <lastmod>2018-08-31T06:20:53.847Z</lastmod>
+    <loc>https://www.ggstu.com/2018/08/31/Hadoop2-X%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%EF%BC%88%E4%BA%8C%EF%BC%89%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2018-08-31T07:29:22.621Z</lastmod>
     <data>
         <display>
-        <title>Hadoop2.X的安装与配置（一）准备阶段</title>
-        <pubTime>2018-08-31T01:51:17.000Z</pubTime>
+        <title>Hadoop2.X的安装与配置（二）本地模式</title>
+        <pubTime>2018-08-31T06:31:32.000Z</pubTime>
         
         <tag>Hadoop</tag>
          
@@ -25,7 +25,7 @@
     
   <url>
     <loc>https://www.ggstu.com/2018/08/30/Linux%E4%B8%8B%EF%BC%88CentOS7%EF%BC%89%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEJDK1-8%EF%BC%88%E4%B8%8A%E4%BC%A0%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F%EF%BC%89/</loc>
-    <lastmod>2018-08-31T04:36:02.246Z</lastmod>
+    <lastmod>2018-08-31T06:25:21.572Z</lastmod>
     <data>
         <display>
         <title>Linux下（CentOS7）安装与配置JDK1.8（上传安装方式）</title>
@@ -37,6 +37,29 @@
          
          
            
+             
+              <breadCrumb title="技术文章" url="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://www.ggstu.com/2018/08/31/Hadoop2-X%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%80%EF%BC%89%E5%87%86%E5%A4%87%E9%98%B6%E6%AE%B5/</loc>
+    <lastmod>2018-08-31T06:20:53.847Z</lastmod>
+    <data>
+        <display>
+        <title>Hadoop2.X的安装与配置（一）准备阶段</title>
+        <pubTime>2018-08-31T01:51:17.000Z</pubTime>
+        
+        <tag>Hadoop</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术文章" url="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+          
         </display>
     </data>
     </url>
