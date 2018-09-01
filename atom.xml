@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.ggstu.com/"/>
-  <updated>2018-08-31T14:11:12.915Z</updated>
+  <updated>2018-09-01T03:28:02.803Z</updated>
   <id>https://www.ggstu.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spark2.3.1版本伪分布模式的安装与部署</title>
+    <link href="https://www.ggstu.com/2018/09/01/Spark2-3-1%E7%89%88%E6%9C%AC%E4%BC%AA%E5%88%86%E5%B8%83%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%83%A8%E7%BD%B2/"/>
+    <id>https://www.ggstu.com/2018/09/01/Spark2-3-1版本伪分布模式的安装与部署/</id>
+    <published>2018-09-01T02:07:44.000Z</published>
+    <updated>2018-09-01T03:28:02.803Z</updated>
+    
+    <content type="html"><![CDATA[<p><br><br>部署Spark的伪分布环境，需要一台Linux机器，首先要有一些准备工作，就是配置Hadoop的伪分布环境。<br>如果不清楚如何配置Hadoop的伪分布环境，点击如下链接进行配置：<br><a href="https://www.ggstu.com/2018/08/31/Hadoop2-X%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%89%EF%BC%89%E4%BC%AA%E5%88%86%E5%B8%83%E6%A8%A1%E5%BC%8F/" target="_blank">Hadoop2.X的安装与配置（伪分布模式）</a></p><p>配置完Hadoop伪分布环境后，接下来开始安装配置Spark2.3.1版本伪分布模式，这里部署的伪分布模式是standalone模式。<br><a id="more"></a></p><p><font size="4"><b>配置过程：</b></font><br><b>1、在Windows上下载Spark2.3.1安装包</b><br>点击如下链接进行下载：<br>由于配置的Hadoop版本是2.7.7,所以下载spark-2.3.1-bin-hadoop2.7.tgz这个压缩包<br><a href="http://spark.apache.org/downloads.html" target="_blank" rel="noopener">Spark官网下载地址</a></p><p><b>2、将安装包上传到Linux上，并解压缩</b><br>使用WinSCP将压缩包上传到事先创建好的tools目录下<br><img src="http://pd8lpasbc.bkt.clouddn.com/42-1.png" width="100%" height="100%"><br>使用SecureCRT远程连接上Linux，将压缩包解压到事先创建好的software目录下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu ~]# cd tools/</span><br><span class="line">[root@ggstu tools]# ls</span><br><span class="line">hadoop-2.7.7.tar.gz  jdk-8u131-linux-x64.tar.gz  spark-2.3.1-bin-hadoop2.7.tgz</span><br><span class="line">[root@ggstu tools]# tar -zxvf spark-2.3.1-bin-hadoop2.7.tgz -C ~/software/</span><br></pre></td></tr></table></figure></p><p><b>3、修改spark-env.sh配置文件</b><br>使用vi编辑器修改spark-env.sh配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu tools]# cd ~/software/spark-2.3.1-bin-hadoop2.7/conf/</span><br><span class="line">[root@ggstu conf]# cp spark-env.sh.template spark-env.sh</span><br><span class="line">[root@ggstu conf]# vi spark-env.sh</span><br></pre></td></tr></table></figure></p><p>在spark-env.sh文件末尾添加如下内容：分别是JAVA_HOME，主机名和端口号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/root/software/jdk1.8.0_131</span><br><span class="line">export SPARK_MASTER_HOST=ggstu</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br></pre></td></tr></table></figure></p><p>这里添加的是你自己那台机器的JAVA_HOME路径，主机名，端口号不变，就是7077。<br>添加完成后，保存退出。</p><p><b>4、修改slaves配置文件</b><br>使用vi编辑器修改slaves配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu conf]# cp slaves.template slaves</span><br><span class="line">[root@ggstu conf]# vi slaves</span><br></pre></td></tr></table></figure></p><p>删除slaves文件末尾的localhost，并添加这台主机的主机名:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ggstu</span><br></pre></td></tr></table></figure></p><p>添加完成后，保存退出。</p><p>到这里Spark的伪分布模式的配置就完成了。<br><br></p><p><font size="4"><b>启动Spark伪分布集群：</b></font><br>由于hadoop和spark命令启动脚本start-all.sh有冲突，所以在系统的环境变量配置文件bash_profile中，不配置Spark的环境。<br>启动Spark，进入spark目录中进行启动。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu ~]# cd ~/software/spark-2.3.1-bin-hadoop2.7/</span><br><span class="line">[root@ggstu spark-2.3.1-bin-hadoop2.7]# sbin/start-all.sh </span><br><span class="line">starting org.apache.spark.deploy.master.Master, logging to /root/software/spark-2.3.1-bin-hadoop2.7/logs/spark-root-org.apache.spark.deploy.master.Master-1-ggstu.out</span><br><span class="line">ggstu: starting org.apache.spark.deploy.worker.Worker, logging to /root/software/spark-2.3.1-bin-hadoop2.7/logs/spark-root-org.apache.spark.deploy.worker.Worker-1-ggstu.out</span><br></pre></td></tr></table></figure></p><p>因为在系统的环境变量配置文件bash_profile中配置了Hadoop的环境，所以除了在spark-2.3.1-bin-hadoop2.7/sbin目录下使用start-all.sh命令启动的是Spark集群的伪分布环境，其它任何位置使用start-all.sh命令启动的是Hadoop集群的伪分布环境。</p><p>使用jps命令查看后台进程，看到启动了Spark的主节点Master和从节点Worker<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu spark-2.3.1-bin-hadoop2.7]# jps</span><br><span class="line">11858 Jps</span><br><span class="line">11736 Master</span><br><span class="line">11805 Worker</span><br></pre></td></tr></table></figure></p><p>若要查看集群的基本信息，可以在网页中输入IP:8080端口进行访问。</p><p><font color="#f00">注意：</font>若使用购买的Linux服务器，这里的IP为公网IP。<br><img src="http://pd8lpasbc.bkt.clouddn.com/42-2.png" width="100%" height="100%"><br>若要关闭Spark集群，使用如下命令关闭<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu spark-2.3.1-bin-hadoop2.7]# sbin/stop-all.sh </span><br><span class="line">ggstu: stopping org.apache.spark.deploy.worker.Worker</span><br><span class="line">stopping org.apache.spark.deploy.master.Master</span><br></pre></td></tr></table></figure></p><p>到这里Spark2.3.1版本伪分布模式的配置，以及启动关闭就介绍完了。</p><p>如果在安装过程中遇到什么问题，欢迎评论。<br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;br&gt;&lt;br&gt;部署Spark的伪分布环境，需要一台Linux机器，首先要有一些准备工作，就是配置Hadoop的伪分布环境。&lt;br&gt;如果不清楚如何配置Hadoop的伪分布环境，点击如下链接进行配置：&lt;br&gt;&lt;a href=&quot;https://www.ggstu.com/2018/08/31/Hadoop2-X%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%89%EF%BC%89%E4%BC%AA%E5%88%86%E5%B8%83%E6%A8%A1%E5%BC%8F/&quot; target=&quot;_blank&quot;&gt;Hadoop2.X的安装与配置（伪分布模式）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;配置完Hadoop伪分布环境后，接下来开始安装配置Spark2.3.1版本伪分布模式，这里部署的伪分布模式是standalone模式。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+    
+    
+      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux下NTP时间服务器的配置与搭建</title>
@@ -430,28 +453,6 @@
     <summary type="html">
     
       &lt;p&gt;&lt;strong&gt;extends关键字实现继承&lt;/strong&gt;&lt;br&gt;Scala中，与Java一样，也是使用extends关键字让子类继承父类，使用继承可以有效地复用代码。&lt;br&gt;继承表示子类可以继承父类的属性和方法，子类可以在自己内部放入父类所没有而子类特有的属性和方法。&lt;br&gt;子类可以覆盖父类的属性和方法，但是如果父类用final修饰，属性和方法用final修饰，则该类是无法被继承的，即属性和方法是无法被覆盖。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
-    
-    
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Scala的apply方法</title>
-    <link href="https://www.ggstu.com/2018/08/19/Scala%E7%9A%84apply%E6%96%B9%E6%B3%95/"/>
-    <id>https://www.ggstu.com/2018/08/19/Scala的apply方法/</id>
-    <published>2018-08-19T06:43:19.000Z</published>
-    <updated>2018-08-19T14:19:53.025Z</updated>
-    
-    <content type="html"><![CDATA[<p>在Scala的object中，可以声明apply方法。<br>而使用”类名()”的形式，其实就是”类名.apply()”的一种缩写。通常使用这种方式来构造类的对象，而不是使用”new 类名()”的方式。<br>例如：”Hello World”(6)实际上就是”Hello World”.apply(6)的缩写。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; &quot;Hello World&quot;(6)</span><br><span class="line">res0: Char = W</span><br><span class="line"></span><br><span class="line">scala&gt; &quot;Hello World&quot;.apply(6)</span><br><span class="line">res1: Char = W</span><br></pre></td></tr></table></figure></p><p>例如：Array(1,2,3,4)，实际上是用Array object的apply()函数来创建Array类的实例，也就是一个数组。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; Array(1,2,3,4)</span><br><span class="line">res2: Array[Int] = Array(1, 2, 3, 4)</span><br><span class="line"></span><br><span class="line">scala&gt; Array.apply(1,2,3,4)</span><br><span class="line">res3: Array[Int] = Array(1, 2, 3, 4)</span><br></pre></td></tr></table></figure></p><p><br><br>通常在伴生对象中实现apply方法，在其中实现构造伴生类的对象的功能，此时创建对象可以省略new关键字<br>例如：定义自己的伴生类和伴生对象<br>此时创建对象由于省略了new关键字，就会在object中找对应的apply方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; :paste</span><br><span class="line">// Entering paste mode (ctrl-D to finish)</span><br><span class="line"></span><br><span class="line">class Student(val name:String)</span><br><span class="line"></span><br><span class="line">object Student&#123;</span><br><span class="line">    def apply(name:String) = new Student(name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Exiting paste mode, now interpreting.</span><br><span class="line"></span><br><span class="line">defined class Student</span><br><span class="line">defined object Student</span><br><span class="line"></span><br><span class="line">scala&gt; val s = Student(&quot;Tom&quot;)</span><br><span class="line">s: Student = Student@7d286fb6</span><br></pre></td></tr></table></figure></p><p>如果没有apply方法，创建对象省略new关键字就会报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; class Student(val name:String)</span><br><span class="line">defined class Student</span><br><span class="line"></span><br><span class="line">scala&gt; val s = new Student(&quot;Tom&quot;)</span><br><span class="line">s: Student = Student@4032d386</span><br><span class="line"></span><br><span class="line">scala&gt; val s1 = Student(&quot;Bob&quot;)</span><br><span class="line">&lt;console&gt;:11: error: not found: value Student</span><br><span class="line">       val s1 = Student(&quot;Bob&quot;)</span><br><span class="line">                ^</span><br></pre></td></tr></table></figure></p><p><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在Scala的object中，可以声明apply方法。&lt;br&gt;而使用”类名()”的形式，其实就是”类名.apply()”的一种缩写。通常使用这种方式来构造类的对象，而不是使用”new 类名()”的方式。&lt;br&gt;例如：”Hello World”(6)实际上就是”Hello World”.apply(6)的缩写。&lt;br&gt;
     
     </summary>
     
