@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.ggstu.com/"/>
-  <updated>2018-09-05T12:10:25.878Z</updated>
+  <updated>2018-09-05T15:42:22.532Z</updated>
   <id>https://www.ggstu.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spark中transformation的map算子的使用（Java代码）</title>
+    <link href="https://www.ggstu.com/2018/09/05/Spark%E4%B8%ADtransformation%E7%9A%84map%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/"/>
+    <id>https://www.ggstu.com/2018/09/05/Spark中transformation的map算子的使用（Java代码）/</id>
+    <published>2018-09-05T15:14:42.000Z</published>
+    <updated>2018-09-05T15:42:22.532Z</updated>
+    
+    <content type="html"><![CDATA[<p>在spark官方文档中，对map算子的描述如下所示<br><img src="http://pd8lpasbc.bkt.clouddn.com/51-1.png" width="100%" height="100%"><br>意思就是，返回一个新的RDD，该RDD由每一个输入元素经过func函数转换后组成。<br><a id="more"></a><br>例如：将集合中的每个元素开平方<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import org.apache.spark.SparkConf;</span><br><span class="line">import org.apache.spark.api.java.JavaRDD;</span><br><span class="line">import org.apache.spark.api.java.JavaSparkContext;</span><br><span class="line">import org.apache.spark.api.java.function.Function;</span><br><span class="line">import org.apache.spark.api.java.function.VoidFunction;</span><br><span class="line"></span><br><span class="line">public class MapTest &#123;</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">SparkConf conf = new SparkConf()</span><br><span class="line">.setAppName(&quot;MapTest&quot;)</span><br><span class="line">.setMaster(&quot;local&quot;);</span><br><span class="line"></span><br><span class="line">JavaSparkContext sc = new JavaSparkContext(conf);</span><br><span class="line"></span><br><span class="line">List&lt;Integer&gt; numbers = Arrays.asList(1,2,3,4,5,6,7,8,9,10);</span><br><span class="line"></span><br><span class="line">JavaRDD&lt;Integer&gt; numberRDD = sc.parallelize(numbers);</span><br><span class="line"></span><br><span class="line">JavaRDD&lt;Integer&gt; resultRDD = numberRDD.map(new Function&lt;Integer, Integer&gt;() &#123;</span><br><span class="line">private static final long serialVersionUID = 1L;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public Integer call(Integer num) throws Exception &#123;</span><br><span class="line">return num * num;</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">resultRDD.foreach(new VoidFunction&lt;Integer&gt;() &#123;</span><br><span class="line">private static final long serialVersionUID = 1L;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void call(Integer res) throws Exception &#123;</span><br><span class="line">System.out.println(res);</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">sc.close();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地IDE执行后，得到如下结果，即使用map操作将一个集合中的每个元素开平方<br><img src="http://pd8lpasbc.bkt.clouddn.com/51-2.png" width="50%" height="50%"><br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在spark官方文档中，对map算子的描述如下所示&lt;br&gt;&lt;img src=&quot;http://pd8lpasbc.bkt.clouddn.com/51-1.png&quot; width=&quot;100%&quot; height=&quot;100%&quot;&gt;&lt;br&gt;意思就是，返回一个新的RDD，该RDD由每一个输入元素经过func函数转换后组成。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+    
+    
+      <category term="Java" scheme="https://www.ggstu.com/tags/Java/"/>
+    
+      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
+    
+  </entry>
   
   <entry>
     <title>Spark中RDD的transformation操作和action操作介绍</title>
@@ -376,9 +400,9 @@
       <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Linux" scheme="https://www.ggstu.com/tags/Linux/"/>
-    
       <category term="Java" scheme="https://www.ggstu.com/tags/Java/"/>
+    
+      <category term="Linux" scheme="https://www.ggstu.com/tags/Linux/"/>
     
   </entry>
   
@@ -400,9 +424,9 @@
       <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
     
-      <category term="Linux" scheme="https://www.ggstu.com/tags/Linux/"/>
-    
       <category term="Java" scheme="https://www.ggstu.com/tags/Java/"/>
+    
+      <category term="Linux" scheme="https://www.ggstu.com/tags/Linux/"/>
     
   </entry>
   
@@ -440,29 +464,6 @@
     <summary type="html">
     
       &lt;p&gt;&lt;strong&gt;隐式转换函数&lt;/strong&gt;&lt;br&gt;Scala的隐式转换函数是以implicit关键字声明的带有单个参数的函数。&lt;br&gt;Scala会根据隐式转换函数的签名，在程序中使用到隐式转换函数接收的参数类型定义的对象时，会自动将其传入隐式转换函数，转换为另外一种类型的对象并返回。这就是“隐式转换”。&lt;br&gt;通常建议将隐式转换函数的名称命名为“源类型2目标类型”的形式。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
-    
-    
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Scala的协变和逆变</title>
-    <link href="https://www.ggstu.com/2018/08/25/Scala%E7%9A%84%E5%8D%8F%E5%8F%98%E5%92%8C%E9%80%86%E5%8F%98/"/>
-    <id>https://www.ggstu.com/2018/08/25/Scala的协变和逆变/</id>
-    <published>2018-08-25T11:33:06.000Z</published>
-    <updated>2018-08-25T12:24:11.558Z</updated>
-    
-    <content type="html"><![CDATA[<p>在Java中，如果定义父类A，子类B，那么根据多态性，A a = new B是可以编译通过的。<br>但是如果泛型B的集合直接赋给父类A的集合，即List&lt;A> aList = new ArrayList&lt;B>();会报错。<br>Scala的协变和逆变就是解决这一问题的存在。</p><p><strong>Scala的协变</strong><br><a id="more"></a><br>泛型变量的值可以是本身类型或者其子类的类型。<br>Scala的class或trait的泛型定义中，如果在类型参数前面加上+符号，就可以使类或特质变为协变。<br>例如：有了协变就可以把一个子类Bird的EatSomething[Bird]赋值给父类Animal的EatSomething[Animal]。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; class Animal</span><br><span class="line">defined class Animal</span><br><span class="line"></span><br><span class="line">scala&gt; class Bird extends Animal</span><br><span class="line">defined class Bird</span><br><span class="line"></span><br><span class="line">scala&gt; class EatSomething[+T](t:T)</span><br><span class="line">defined class EatSomething</span><br><span class="line"></span><br><span class="line">scala&gt; val s1:EatSomething[Bird] = new EatSomething[Bird](new Bird)</span><br><span class="line">s1: EatSomething[Bird] = EatSomething@59e505b2</span><br><span class="line"></span><br><span class="line">scala&gt; val s2:EatSomething[Animal] = s1</span><br><span class="line">s2: EatSomething[Animal] = EatSomething@59e505b2</span><br></pre></td></tr></table></figure></p><p><br><br><strong>Scala的逆变</strong><br><br><br>泛型变量的值可以是本身类型或者其父类的类型。<br>Scala的class或trait的泛型定义中，如果在类型参数前面加上-符号，就可以使类或特质变为逆变。<br>例如：有了逆变就可以把一个父类Animal的EatSomething[Animal]赋值给子类Bird的EatSomething[Bird]。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">scala&gt; class Animal</span><br><span class="line">defined class Animal</span><br><span class="line"></span><br><span class="line">scala&gt; class Bird extends Animal</span><br><span class="line">defined class Bird</span><br><span class="line"></span><br><span class="line">scala&gt; class EatSomething[-T](t:T)</span><br><span class="line">defined class EatSomething</span><br><span class="line"></span><br><span class="line">scala&gt; val s1:EatSomething[Animal] = new EatSomething[Animal](new Animal)</span><br><span class="line">s1: EatSomething[Animal] = EatSomething@82ea68c</span><br><span class="line"></span><br><span class="line">scala&gt; val s2:EatSomething[Bird] = s1</span><br><span class="line">s2: EatSomething[Bird] = EatSomething@82ea68c</span><br></pre></td></tr></table></figure></p><p><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在Java中，如果定义父类A，子类B，那么根据多态性，A a = new B是可以编译通过的。&lt;br&gt;但是如果泛型B的集合直接赋给父类A的集合，即List&amp;lt;A&gt; aList = new ArrayList&amp;lt;B&gt;();会报错。&lt;br&gt;Scala的协变和逆变就是解决这一问题的存在。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Scala的协变&lt;/strong&gt;&lt;br&gt;
     
     </summary>
     
