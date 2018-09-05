@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="You can either travel or read,but either your body or soul must be on the way."><title>Spark中RDD的transformation操作和action操作介绍 | GGSTU</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Spark中RDD的transformation操作和action操作介绍</h1><a id="logo" href="/.">GGSTU</a><p class="description">Good Good Study</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/music/"><i class="fa fa-music"> 音乐</i></a><a href="/movie/"><i class="fa fa-film"> 电影</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/comment/"><i class="fa fa-comment"> 留言</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Spark中RDD的transformation操作和action操作介绍</h1><div class="post-meta">Sep 5, 2018<span> | </span><span class="category"><a href="/categories/技术文章/">技术文章</a></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1,297</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 5</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/2018/09/05/Spark中RDD的transformation操作和action操作介绍/#vcomment"><span class="valine-comment-count" data-xid="/2018/09/05/Spark中RDD的transformation操作和action操作介绍/"></span><span> 条评论</span></a><div class="post-content"><p><b>Spark支持两种RDD操作，transformation和action</b></p>
+<p><b>transformation</b>：针对已有的RDD创建一个新的RDD。比如map就是一种transformation操作，它用于将已有RDD的每个元素传入一个自定义的函数，并获取一个新的元素，然后将所有的新元素组成一个新的RDD。</p>
+<p><b>action</b>：主要是对RDD进行最后的操作，比如遍历、reduce、保存到文件等，并将结果返回给Driver程序。</p>
+<a id="more"></a>
+<font size="4"><b>特点</b></font><br>transformation的特点就是<b>延迟加载</b>特性。如果一个spark应用中只定义了transformation操作，那么即使执行了该应用，这些操作也不会执行。也就是说，transformation不会触发spark程序的执行，它们只是记录了对RDD所做的操作，但是不会自发的执行。只有当transformation之后接着执行了一个action操作，那么所有的transformation才会执行。Spark通过这种延迟加载特性，避免产生过多的中间结果，从而让Spark更加高效的运行。<br>action操作执行，会触发一个spark job的运行，从而触发这个action之前所有的transformation的执行。<br><br><br>例如以之前写的Scala版本的Spark的wordcount程序为例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.spark.SparkConf</span><br><span class="line">import org.apache.spark.SparkContext</span><br><span class="line"></span><br><span class="line">object WordCountLocal &#123;</span><br><span class="line">  def main(args:Array[String])&#123;</span><br><span class="line">    val conf = new SparkConf()</span><br><span class="line">        .setAppName(&quot;WordCountLocal&quot;)</span><br><span class="line">        .setMaster(&quot;local&quot;)</span><br><span class="line">        </span><br><span class="line">    val sc = new SparkContext(conf)</span><br><span class="line">    </span><br><span class="line">    val lines = sc.textFile(&quot;C://Users//asus//Desktop//test.txt&quot;)</span><br><span class="line">    </span><br><span class="line">    val words = lines.flatMap(line =&gt; line.split(&quot; &quot;))</span><br><span class="line">    </span><br><span class="line">    val pairs = words.map(word =&gt; (word,1))</span><br><span class="line">    </span><br><span class="line">    val wordCounts = pairs.reduceByKey(_ + _)</span><br><span class="line">    </span><br><span class="line">    wordCounts.foreach(wordCount =&gt; println(wordCount._1 + &quot;: &quot; + wordCount._2))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><br>使用textFile创建一个RDD后，其后的flatMap、map、reduceByKey都是transformation操作，不会触发程序的执行，只有执行了最后的foreach操作，前面的transformation操作才开始执行。<br><br><br><font size="4"><b>transformation介绍</b></font>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left">transformation</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">map(func)</td>
+<td style="text-align:left">返回一个新的RDD，该RDD由每一个输入元素经过func函数转换后组成</td>
+</tr>
+<tr>
+<td style="text-align:left">filter(func)</td>
+<td style="text-align:left">返回一个新的RDD，该RDD由经过func函数计算后返回值为true的输入元素组成</td>
+</tr>
+<tr>
+<td style="text-align:left">flatMap(func)</td>
+<td style="text-align:left">类似于map，但是每一个输入元素可以被映射为0或多个输出元素（所以func应该返回一个序列，而不是单一元素）</td>
+</tr>
+<tr>
+<td style="text-align:left">mapPartitions(func)</td>
+<td style="text-align:left">类似于map，但独立地在RDD的每一个分片上运行，因此在类型为T的RDD上运行时，func的函数类型必须是Iterator<t> =&gt; Iterator<u></u></t></td>
+</tr>
+<tr>
+<td style="text-align:left">mapPartitionsWithIndex(func)</td>
+<td style="text-align:left">类似于mapPartitions，但func带有一个整数参数表示分片的索引值，因此在类型为T的RDD上运行时，func的函数类型必须是(Int, Iterator<t>) =&gt; Iterator<u></u></t></td>
+</tr>
+<tr>
+<td style="text-align:left">sample(withReplacement,fraction,seed)</td>
+<td style="text-align:left">根据fraction指定的比例对数据进行采样，可以选择是否使用随机数进行替换，seed用于指定随机数生成器种子</td>
+</tr>
+<tr>
+<td style="text-align:left">union(otherDataset)</td>
+<td style="text-align:left">对源RDD和参数RDD求并集后返回一个新的RDD</td>
+</tr>
+<tr>
+<td style="text-align:left">intersection(otherDataset)</td>
+<td style="text-align:left">对源RDD和参数RDD求交集后返回一个新的RDD</td>
+</tr>
+<tr>
+<td style="text-align:left">distinct([numPartitions]))</td>
+<td style="text-align:left">对源RDD进行去重后返回一个新的RDD</td>
+</tr>
+<tr>
+<td style="text-align:left">groupByKey([numPartitions])</td>
+<td style="text-align:left">在一个(K,V)的RDD上调用，返回一个(K, Iterable&lt;V>)的RDD</td>
+</tr>
+<tr>
+<td style="text-align:left">reduceByKey(func, [numPartitions])</td>
+<td style="text-align:left">在一个(K,V)的RDD上调用，返回一个(K,V)的RDD，使用指定的reduce函数，将相同key的值聚合到一起，与groupByKey类似，reduce任务的个数可以通过第二个可选的参数来设置</td>
+</tr>
+<tr>
+<td style="text-align:left">sortByKey([ascending], [numPartitions])</td>
+<td style="text-align:left">在一个(K,V)的RDD上调用，K必须实现Ordered接口，返回一个按照key进行排序的(K,V)的RDD</td>
+</tr>
+<tr>
+<td style="text-align:left">join(otherDataset, [numPartitions])</td>
+<td style="text-align:left">在类型为(K,V)和(K,W)的RDD上调用，返回一个相同key对应的所有元素对在一起的(K,(V,W))的RDD</td>
+</tr>
+<tr>
+<td style="text-align:left">cogroup(otherDataset, [numPartitions])</td>
+<td style="text-align:left">在类型为(K,V)和(K,W)的RDD上调用，返回一个(K,(Iterable&lt;V>,Iterable&lt;W>))类型的RDD</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<font size="4"><b>action介绍</b></font>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left">action</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">reduce(func)</td>
+<td style="text-align:left">通过func函数聚集RDD中的所有元素，这个函数必须是可交换且可并联的</td>
+</tr>
+<tr>
+<td style="text-align:left">collect(func)</td>
+<td style="text-align:left">在驱动程序中，以数组的形式返回数据集的所有元素</td>
+</tr>
+<tr>
+<td style="text-align:left">count()</td>
+<td style="text-align:left">返回RDD的元素个数</td>
+</tr>
+<tr>
+<td style="text-align:left">first()</td>
+<td style="text-align:left">返回RDD的第一个元素（类似于take(1)）</td>
+</tr>
+<tr>
+<td style="text-align:left">take(n)</td>
+<td style="text-align:left">返回一个由数据集的前n个元素组成的数组</td>
+</tr>
+<tr>
+<td style="text-align:left">takeSample(withReplacement, num, [seed])</td>
+<td style="text-align:left">返回一个数组，该数组由从数据集中随机采样的num个元素组成，可以选择是否用随机数替换不足的部分，seed用于指定随机数生成器种子</td>
+</tr>
+<tr>
+<td style="text-align:left">takeOrdered(n, [ordering])</td>
+<td style="text-align:left">返回使用自然顺序或自定义比较器的RDD的前n个元素</td>
+</tr>
+<tr>
+<td style="text-align:left">saveAsTextFile(path)</td>
+<td style="text-align:left">将数据集的元素以text file的形式保存到HDFS文件系统或者其它支持的文件系统，对于每个元素，Spark会调用toString方法，将它转换为文件中的文本</td>
+</tr>
+<tr>
+<td style="text-align:left">saveAsSequenceFile(path)</td>
+<td style="text-align:left">将数据集中的元素以Hadoop SequenceFile的格式保存到指定的目录下，可以是HDFS或者其它Hadoop支持的文件系统</td>
+</tr>
+<tr>
+<td style="text-align:left">countByKey()</td>
+<td style="text-align:left">针对(K,V)类型的RDD，返回一个(K,Int)的map，表示每一个key对应的元素个数</td>
+</tr>
+<tr>
+<td style="text-align:left">foreach(func)</td>
+<td style="text-align:left">在数据集的每个元素上，运行func函数进行更新</td>
+</tr>
+</tbody>
+</table>
+<p><br><br>之后的文章会分别使用Java代码和Scala代码来示范常用的transformation算子和action算子的使用。<br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>
+</div><div class="tags"><a href="/tags/Spark/">Spark</a></div><div class="post-nav"><a class="next" href="/2018/09/05/Spark弹性分布式数据集RDD介绍/">Spark弹性分布式数据集RDD介绍</a></div><div id="vcomment"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'cUFuKub5F8RGgBCwnKXbCyAF-gzGzoHsz',
+  appKey:'Kja1zDn7ScJ7FA2xzyp0reuY',
+  placeholder:'评论内容',
+  avatar:'robohash',
+  guest_info:guest_info,
+  pageSize:'10'
+})</script></div></div></div><div class="pure-u-1 pure-u-md-1-4"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://www.ggstu.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术文章/">技术文章</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/随便说说/">随便说说</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Hadoop/" style="font-size: 15px;">Hadoop</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Scala/" style="font-size: 15px;">Scala</a> <a href="/tags/Spark/" style="font-size: 15px;">Spark</a> <a href="/tags/心情/" style="font-size: 15px;">心情</a> <a href="/tags/健身/" style="font-size: 15px;">健身</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/09/05/Spark中RDD的transformation操作和action操作介绍/">Spark中RDD的transformation操作和action操作介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/05/Spark弹性分布式数据集RDD介绍/">Spark弹性分布式数据集RDD介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/03/Spark创建RDD的几种方式（Scala代码）/">Spark创建RDD的几种方式（Scala代码）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/03/Spark创建RDD的几种方式（Java代码）/">Spark创建RDD的几种方式（Java代码）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/02/使用Scala开发Spark的wordcount程序/">使用Scala开发Spark的wordcount程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/02/使用Java开发Spark的wordcount程序/">使用Java开发Spark的wordcount程序</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/02/林润故居/">林润故居</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/Spark2-3-1版本全分布模式的安装与部署/">Spark2.3.1版本全分布模式的安装与部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/09/01/Spark2-3-1版本伪分布模式的安装与部署/">Spark2.3.1版本伪分布模式的安装与部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/31/Linux下NTP时间服务器的配置与搭建/">Linux下NTP时间服务器的配置与搭建</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a target="_blank"></a><ul></ul><a href="http://www.github.com/" title="GitHub" target="_blank">GitHub</a><ul></ul><a href="http://hadoop.apache.org/" title="Hadoop" target="_blank">Hadoop</a><ul></ul><a href="http://spark.apache.org/" title="Spark" target="_blank">Spark</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div align="center"><a href="http://www.amazingcounters.com"><img border="0" src="http://cc.amazingcounters.com/counter.php?i=3225931&c=9678106" alt="位访客"></a></div><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">GGSTU.</a> 由<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo</a> 强力驱动.主题 - <a rel="nofollow" target="_blank" href="https://github.com/pagecho/maupassant/"> maupassant</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
