@@ -4,8 +4,30 @@
 
     
   <url>
+    <loc>https://www.ggstu.com/2018/09/06/Spark%E4%B8%ADtransformation%E7%9A%84map%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Scala%E4%BB%A3%E7%A0%81%EF%BC%89/</loc>
+    <lastmod>2018-09-06T00:20:08.177Z</lastmod>
+    <data>
+        <display>
+        <title>Spark中transformation的map算子的使用（Scala代码）</title>
+        <pubTime>2018-09-05T23:56:05.000Z</pubTime>
+        
+        <tag>Scala</tag>
+         
+        <tag>Spark</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术文章" url="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://www.ggstu.com/2018/09/05/Spark%E4%B8%ADtransformation%E7%9A%84map%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/</loc>
-    <lastmod>2018-09-05T15:42:22.532Z</lastmod>
+    <lastmod>2018-09-06T00:20:06.748Z</lastmod>
     <data>
         <display>
         <title>Spark中transformation的map算子的使用（Java代码）</title>
