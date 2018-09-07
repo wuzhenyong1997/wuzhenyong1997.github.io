@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.ggstu.com/"/>
-  <updated>2018-09-06T15:06:06.941Z</updated>
+  <updated>2018-09-07T00:36:58.399Z</updated>
   <id>https://www.ggstu.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spark中transformation的flatMap算子的使用（Scala代码）</title>
+    <link href="https://www.ggstu.com/2018/09/07/Spark%E4%B8%ADtransformation%E7%9A%84flatMap%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Scala%E4%BB%A3%E7%A0%81%EF%BC%89/"/>
+    <id>https://www.ggstu.com/2018/09/07/Spark中transformation的flatMap算子的使用（Scala代码）/</id>
+    <published>2018-09-07T00:16:22.000Z</published>
+    <updated>2018-09-07T00:36:58.399Z</updated>
+    
+    <content type="html"><![CDATA[<p>在<a href="https://www.ggstu.com/2018/09/06/Spark%E4%B8%ADtransformation%E7%9A%84flatMap%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/" target="_blank">Spark中transformation的flatMap算子的使用（Java代码）</a>这篇文章中用Java代码实现了flatMap算子将文本行拆分成一个个单词，这里使用同样的例子，用Scala来开发。<br><a id="more"></a><br>同样，在桌面创建了个文件test.txt，文件内容为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">good good study</span><br><span class="line">day day up</span><br></pre></td></tr></table></figure></p><p>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.spark.SparkConf</span><br><span class="line">import org.apache.spark.SparkContext</span><br><span class="line"></span><br><span class="line">object FlatMapTest &#123;</span><br><span class="line">  def main(args:Array[String])&#123;</span><br><span class="line">    val conf = new SparkConf()</span><br><span class="line">        .setAppName(&quot;FlatMapTest&quot;)</span><br><span class="line">        .setMaster(&quot;local&quot;)</span><br><span class="line">        </span><br><span class="line">    val sc = new SparkContext(conf)</span><br><span class="line">    </span><br><span class="line">    val lines = sc.textFile(&quot;C://Users//asus//Desktop//test.txt&quot;)</span><br><span class="line">    </span><br><span class="line">    val words = lines.flatMap(line =&gt; line.split(&quot; &quot;))</span><br><span class="line">    </span><br><span class="line">    words.foreach(word =&gt; println(word))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地Scala IDE执行后，得到如下结果，即，使用flatMap算子将文本行拆分成一个个单词<br><img src="http://pd8lpasbc.bkt.clouddn.com/56-1.png" width="50%" height="50%"><br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在&lt;a href=&quot;https://www.ggstu.com/2018/09/06/Spark%E4%B8%ADtransformation%E7%9A%84flatMap%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/&quot; target=&quot;_blank&quot;&gt;Spark中transformation的flatMap算子的使用（Java代码）&lt;/a&gt;这篇文章中用Java代码实现了flatMap算子将文本行拆分成一个个单词，这里使用同样的例子，用Scala来开发。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+    
+    
+      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+    
+      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
+    
+  </entry>
   
   <entry>
     <title>Spark中transformation的flatMap算子的使用（Java代码）</title>
@@ -446,28 +470,6 @@
     <summary type="html">
     
       &lt;p&gt;在完成了准备阶段的配置后，接着就可以配置本地模式了。&lt;br&gt;本地模式的配置需要在如下的配置文件中添加JAVA_HOME的路径。&lt;br&gt;&lt;img src=&quot;http://pd8lpasbc.bkt.clouddn.com/37-1.png&quot; width=&quot;100%&quot; height=&quot;100%&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
-    
-    
-      <category term="Hadoop" scheme="https://www.ggstu.com/tags/Hadoop/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hadoop2.X的安装与配置（一）准备阶段</title>
-    <link href="https://www.ggstu.com/2018/08/31/Hadoop2-X%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%80%EF%BC%89%E5%87%86%E5%A4%87%E9%98%B6%E6%AE%B5/"/>
-    <id>https://www.ggstu.com/2018/08/31/Hadoop2-X的安装与配置（一）准备阶段/</id>
-    <published>2018-08-31T01:51:17.000Z</published>
-    <updated>2018-09-01T00:03:12.062Z</updated>
-    
-    <content type="html"><![CDATA[<p>Hadoop是一个由Apache基金会所开发的分布式系统基础架构。用户可以在不了解分布式底层细节的情况下，开发分布式程序。充分利用集群的威力进行高速运算和存储。<br>Hadoop实现了一个分布式文件系统（Hadoop Distributed File System），简称HDFS。HDFS有高容错性的特点，并且设计用来部署在低廉的（low-cost）硬件上；而且它提供高吞吐量（high throughput）来访问应用程序的数据，适合那些有着超大数据集（large data set）的应用程序。HDFS放宽了（relax）POSIX的要求，可以以流的形式访问（streaming access）文件系统中的数据。<br><a id="more"></a><br>Hadoop的框架最核心的设计就是：HDFS和MapReduce。HDFS为海量的数据提供了存储，则MapReduce为海量的数据提供了计算。</p><p><font size="5"><b>Hadoop有三种安装模式：</b></font><br><b>1、本地模式：</b>一台Linux<br>特点：没有HDFS(Hadoop Distributed File System)，即没有数据的存储。<br>只能测试MapReduce程序，处理的数据是本地数据（Linux文件）</p><p><b>2、伪分布模式：</b> 一台Linux<br>特点：在单机上，模拟一个分布式的环境，具备Hadoop的所有功能</p><p><b>3、全分布模式：</b> 多台Linux（以3台为例）<br>特点：真正的分布式环境，用于生产环境</p><p>这里首先介绍安装配置这几种模式前的准备阶段</p><p><font size="5"><b>准备阶段：</b></font></p><p><font size="4"><b>一、准备Linux机器：</b></font><br>如果是搭建本地模式或者伪分布模式，使用一台Linux机器即可。<br>若是搭建全分布模式，至少需要三台机器。<br>可以购买三台Linux的服务器，也可以在虚拟机上搭建三台Linux机器。<br>如果不懂如何在虚拟机上搭建Linux，点击如下链接进行查看：<br><a href="https://www.ggstu.com/2018/08/13/%E5%A6%82%E4%BD%95%E5%9C%A8VMware-Workstation%E5%AE%89%E8%A3%85RedHat-Linux-7-4/" target="_blank">如何在VMware Workstation安装RedHat Linux 7.4</a></p><p><font size="4"><b>二、在Linux上安装JDK：</b></font><br>如果不懂如何安装JDK，点击如下链接进行安装：<br><a href="https://www.ggstu.com/2018/08/30/Linux%E4%B8%8B%EF%BC%88CentOS7%EF%BC%89%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEJDK1-8%EF%BC%88wget%E5%91%BD%E4%BB%A4%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F%EF%BC%89/" target="_blank">Linux下（CentOS7）安装与配置JDK1.8</a></p><p><font size="4"><b>三、关闭防火墙：</b></font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu ~]# systemctl stop firewalld.service</span><br><span class="line">[root@ggstu ~]# systemctl status firewalld.service</span><br></pre></td></tr></table></figure></p><p><font size="4"><b>四、配置主机名：</b></font><br>使用vi编辑器修改/etc下的hosts配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu ~]# vi /etc/hosts</span><br></pre></td></tr></table></figure></p><p>添加这台Linux机器的IP地址和对应的主机名到此文件中，比如我这台Linux的IP和主机名如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">172.24.101.191 ggstu</span><br></pre></td></tr></table></figure></p><p><font color="#f00">注意：</font>如果使用的是购买的Linux服务器，这里的IP是内网IP。<br>添加完成后，保存退出</p><p><font size="4"><b>五、在Windows上下载Hadoop2.X的安装包：</b></font><br>点击如下链接进行下载，下载binary中的*.tar.gz压缩包<br><a href="http://hadoop.apache.org/releases.html#Download" target="_blank" rel="noopener">http://hadoop.apache.org/releases.html#Download</a></p><p><font size="4"><b>六、将安装包上传到Linux上，并解压缩：</b></font><br>使用WinSCP将压缩包上传到事先创建好的tools目录下<br><img src="http://pd8lpasbc.bkt.clouddn.com/36-1.png" width="100%" height="100%"><br>使用SecureCRT远程连接上Linux，将压缩包解压到事先创建好的software目录下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu ~]# cd tools/</span><br><span class="line">[root@ggstu tools]# ls</span><br><span class="line">hadoop-2.7.7.tar.gz  jdk-8u131-linux-x64.tar.gz</span><br><span class="line">[root@ggstu tools]# tar -zxvf hadoop-2.7.7.tar.gz -C ~/software/</span><br></pre></td></tr></table></figure></p><p><font size="4"><b>七、设置环境变量：</b></font><br>查看HADOOP_HOME所在位置，如下所示，/root/software/hadoop-2.7.7就是HADOOP_HOME的位置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu tools]# cd ~/software/hadoop-2.7.7/</span><br><span class="line">[root@ggstu hadoop-2.7.7]# pwd</span><br><span class="line">/root/software/hadoop-2.7.7</span><br></pre></td></tr></table></figure></p><p>使用vi编辑器修改bash_profile配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu hadoop-2.7.7]# vi ~/.bash_profile</span><br></pre></td></tr></table></figure></p><p>在bash_profile文件末尾添加如下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HADOOP_HOME=/root/software/hadoop-2.7.7</span><br><span class="line">export HADOOP_HOME</span><br><span class="line">PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH</span><br><span class="line">export PATH</span><br></pre></td></tr></table></figure></p><p>添加完成后，保存退出</p><p><font color="#f00">注意：</font>这里设置的HADOOP_HOME即为上面查看到的HADOOP_HOME位置</p><p><font size="4"><b>八、生效环境变量：</b></font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu hadoop-2.7.7]# source ~/.bash_profile</span><br></pre></td></tr></table></figure></p><p><font size="4"><b>九、查看是否配置成功：</b></font><br>输入start-，再双击Tab键，出现的就是Hadoop的启动命令<br>输入stop-，再双击Tab键，出现的就是Hadoop的关闭命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu hadoop-2.7.7]# start-</span><br><span class="line">start-all.cmd        start-dfs.cmd        start-yarn.cmd</span><br><span class="line">start-all.sh         start-dfs.sh         start-yarn.sh</span><br><span class="line">start-balancer.sh    start-secure-dns.sh  </span><br><span class="line">[root@ggstu hadoop-2.7.7]# stop-</span><br><span class="line">stop-all.cmd        stop-dfs.cmd        stop-yarn.cmd</span><br><span class="line">stop-all.sh         stop-dfs.sh         stop-yarn.sh</span><br><span class="line">stop-balancer.sh    stop-secure-dns.sh</span><br></pre></td></tr></table></figure></p><p><br><br>到此，Hadoop2.X安装配置的准备阶段就完成了。就下来就可以根据需要安装本地模式、伪分布模式或全分布模式。<br><br><br>如果在安装过程中遇到什么问题，欢迎评论。<br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Hadoop是一个由Apache基金会所开发的分布式系统基础架构。用户可以在不了解分布式底层细节的情况下，开发分布式程序。充分利用集群的威力进行高速运算和存储。&lt;br&gt;Hadoop实现了一个分布式文件系统（Hadoop Distributed File System），简称HDFS。HDFS有高容错性的特点，并且设计用来部署在低廉的（low-cost）硬件上；而且它提供高吞吐量（high throughput）来访问应用程序的数据，适合那些有着超大数据集（large data set）的应用程序。HDFS放宽了（relax）POSIX的要求，可以以流的形式访问（streaming access）文件系统中的数据。&lt;br&gt;
     
     </summary>
     
