@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.ggstu.com/"/>
-  <updated>2018-09-09T00:29:46.285Z</updated>
+  <updated>2018-09-10T00:59:15.173Z</updated>
   <id>https://www.ggstu.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spark中transformation的sortByKey算子的使用（Scala代码）</title>
+    <link href="https://www.ggstu.com/2018/09/10/Spark%E4%B8%ADtransformation%E7%9A%84sortByKey%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Scala%E4%BB%A3%E7%A0%81%EF%BC%89/"/>
+    <id>https://www.ggstu.com/2018/09/10/Spark中transformation的sortByKey算子的使用（Scala代码）/</id>
+    <published>2018-09-10T00:10:40.000Z</published>
+    <updated>2018-09-10T00:59:15.173Z</updated>
+    
+    <content type="html"><![CDATA[<p>在<a href="https://www.ggstu.com/2018/09/09/Spark%E4%B8%ADtransformation%E7%9A%84sortByKey%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/" target="_blank">Spark中transformation的sortByKey算子的使用（Java代码）</a>这篇文章中用Java代码实现了sortByKey算子对学生成绩进行了升序和降序排序，这里使用同样的例子，用Scala来开发。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.spark.SparkConf</span><br><span class="line">import org.apache.spark.SparkContext</span><br><span class="line"></span><br><span class="line">object SortByKeyTest &#123;</span><br><span class="line">  def main(args:Array[String])&#123;</span><br><span class="line">    val conf = new SparkConf()</span><br><span class="line">          .setAppName(&quot;SortByKeyTest&quot;)</span><br><span class="line">          .setMaster(&quot;local&quot;)</span><br><span class="line">          </span><br><span class="line">    val sc = new SparkContext(conf)</span><br><span class="line">    </span><br><span class="line">    val scoreList = Array(</span><br><span class="line">      Tuple2(80, &quot;Tom&quot;),</span><br><span class="line">      Tuple2(75, &quot;Bob&quot;),</span><br><span class="line">      Tuple2(92, &quot;Alice&quot;),</span><br><span class="line">      Tuple2(85, &quot;Jack&quot;),</span><br><span class="line">      Tuple2(60, &quot;Jerry&quot;)</span><br><span class="line">    )</span><br><span class="line">    </span><br><span class="line">    val scores = sc.parallelize(scoreList)</span><br><span class="line">    </span><br><span class="line">    val sortedScore = scores.sortByKey()</span><br><span class="line">    </span><br><span class="line">    sortedScore.foreach&#123;score =&gt;</span><br><span class="line">      println(&quot;Name: &quot; + score._2)</span><br><span class="line">      println(&quot;Score: &quot; + score._1)</span><br><span class="line">      println(&quot;********************&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地Scala IDE执行后，得到如下结果，即，使用sortByKey算子对学生成绩进行了升序排序<br><img src="http://pd8lpasbc.bkt.clouddn.com/62-1.png" width="60%" height="60%"><br>按成绩降序排序，将sortByKey()改成sortByKey(false)即可，修改后结果如下<br><img src="http://pd8lpasbc.bkt.clouddn.com/62-2.png" width="60%" height="60%"><br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在&lt;a href=&quot;https://www.ggstu.com/2018/09/09/Spark%E4%B8%ADtransformation%E7%9A%84sortByKey%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/&quot; target=&quot;_blank&quot;&gt;Spark中transformation的sortByKey算子的使用（Java代码）&lt;/a&gt;这篇文章中用Java代码实现了sortByKey算子对学生成绩进行了升序和降序排序，这里使用同样的例子，用Scala来开发。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+    
+    
+      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+    
+      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
+    
+  </entry>
   
   <entry>
     <title>Spark中transformation的sortByKey算子的使用（Java代码）</title>
@@ -457,29 +481,6 @@
     <summary type="html">
     
       &lt;p&gt;部署Spark的全分布模式，至少需要三台Linux机器，首先要有一些准备工作，就是配置Hadoop的全分布环境。我准备了三台机器，分别命名为Master，Worker1，Worker2&lt;br&gt;如果不清楚如何配置Hadoop的全分布环境，点击如下链接进行配置：&lt;br&gt;&lt;a href=&quot;https://www.ggstu.com/2018/08/31/Hadoop2-X%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%EF%BC%88%E5%9B%9B%EF%BC%89%E5%85%A8%E5%88%86%E5%B8%83%E6%A8%A1%E5%BC%8F/&quot; target=&quot;_blank&quot;&gt;Hadoop2.X的安装与配置（全分布模式）&lt;/a&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
-    
-    
-      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spark2.3.1版本伪分布模式的安装与部署</title>
-    <link href="https://www.ggstu.com/2018/09/01/Spark2-3-1%E7%89%88%E6%9C%AC%E4%BC%AA%E5%88%86%E5%B8%83%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%83%A8%E7%BD%B2/"/>
-    <id>https://www.ggstu.com/2018/09/01/Spark2-3-1版本伪分布模式的安装与部署/</id>
-    <published>2018-09-01T02:07:44.000Z</published>
-    <updated>2018-09-01T03:28:02.803Z</updated>
-    
-    <content type="html"><![CDATA[<p><br><br>部署Spark的伪分布环境，需要一台Linux机器，首先要有一些准备工作，就是配置Hadoop的伪分布环境。<br>如果不清楚如何配置Hadoop的伪分布环境，点击如下链接进行配置：<br><a href="https://www.ggstu.com/2018/08/31/Hadoop2-X%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%89%EF%BC%89%E4%BC%AA%E5%88%86%E5%B8%83%E6%A8%A1%E5%BC%8F/" target="_blank">Hadoop2.X的安装与配置（伪分布模式）</a></p><p>配置完Hadoop伪分布环境后，接下来开始安装配置Spark2.3.1版本伪分布模式，这里部署的伪分布模式是standalone模式。<br><a id="more"></a></p><p><font size="4"><b>配置过程：</b></font><br><b>1、在Windows上下载Spark2.3.1安装包</b><br>点击如下链接进行下载：<br>由于配置的Hadoop版本是2.7.7,所以下载spark-2.3.1-bin-hadoop2.7.tgz这个压缩包<br><a href="http://spark.apache.org/downloads.html" target="_blank" rel="noopener">Spark官网下载地址</a></p><p><b>2、将安装包上传到Linux上，并解压缩</b><br>使用WinSCP将压缩包上传到事先创建好的tools目录下<br><img src="http://pd8lpasbc.bkt.clouddn.com/42-1.png" width="100%" height="100%"><br>使用SecureCRT远程连接上Linux，将压缩包解压到事先创建好的software目录下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu ~]# cd tools/</span><br><span class="line">[root@ggstu tools]# ls</span><br><span class="line">hadoop-2.7.7.tar.gz  jdk-8u131-linux-x64.tar.gz  spark-2.3.1-bin-hadoop2.7.tgz</span><br><span class="line">[root@ggstu tools]# tar -zxvf spark-2.3.1-bin-hadoop2.7.tgz -C ~/software/</span><br></pre></td></tr></table></figure></p><p><b>3、修改spark-env.sh配置文件</b><br>使用vi编辑器修改spark-env.sh配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu tools]# cd ~/software/spark-2.3.1-bin-hadoop2.7/conf/</span><br><span class="line">[root@ggstu conf]# cp spark-env.sh.template spark-env.sh</span><br><span class="line">[root@ggstu conf]# vi spark-env.sh</span><br></pre></td></tr></table></figure></p><p>在spark-env.sh文件末尾添加如下内容：分别是JAVA_HOME，主机名和端口号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/root/software/jdk1.8.0_131</span><br><span class="line">export SPARK_MASTER_HOST=ggstu</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br></pre></td></tr></table></figure></p><p>这里添加的是你自己那台机器的JAVA_HOME路径，主机名，端口号不变，就是7077。<br>添加完成后，保存退出。</p><p><b>4、修改slaves配置文件</b><br>使用vi编辑器修改slaves配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu conf]# cp slaves.template slaves</span><br><span class="line">[root@ggstu conf]# vi slaves</span><br></pre></td></tr></table></figure></p><p>删除slaves文件末尾的localhost，并添加这台主机的主机名:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ggstu</span><br></pre></td></tr></table></figure></p><p>添加完成后，保存退出。</p><p>到这里Spark的伪分布模式的配置就完成了。<br><br></p><p><font size="4"><b>启动Spark伪分布集群：</b></font><br>由于hadoop和spark命令启动脚本start-all.sh有冲突，所以在系统的环境变量配置文件bash_profile中，不配置Spark的环境。<br>启动Spark，进入spark目录中进行启动。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu ~]# cd ~/software/spark-2.3.1-bin-hadoop2.7/</span><br><span class="line">[root@ggstu spark-2.3.1-bin-hadoop2.7]# sbin/start-all.sh </span><br><span class="line">starting org.apache.spark.deploy.master.Master, logging to /root/software/spark-2.3.1-bin-hadoop2.7/logs/spark-root-org.apache.spark.deploy.master.Master-1-ggstu.out</span><br><span class="line">ggstu: starting org.apache.spark.deploy.worker.Worker, logging to /root/software/spark-2.3.1-bin-hadoop2.7/logs/spark-root-org.apache.spark.deploy.worker.Worker-1-ggstu.out</span><br></pre></td></tr></table></figure></p><p>因为在系统的环境变量配置文件bash_profile中配置了Hadoop的环境，所以除了在spark-2.3.1-bin-hadoop2.7/sbin目录下使用start-all.sh命令启动的是Spark集群的伪分布环境，其它任何位置使用start-all.sh命令启动的是Hadoop集群的伪分布环境。</p><p>使用jps命令查看后台进程，看到启动了Spark的主节点Master和从节点Worker<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu spark-2.3.1-bin-hadoop2.7]# jps</span><br><span class="line">11858 Jps</span><br><span class="line">11736 Master</span><br><span class="line">11805 Worker</span><br></pre></td></tr></table></figure></p><p>若要查看集群的基本信息，可以在网页中输入IP:8080端口进行访问。</p><p><font color="#f00">注意：</font>若使用购买的Linux服务器，这里的IP为公网IP。<br><img src="http://pd8lpasbc.bkt.clouddn.com/42-2.png" width="100%" height="100%"><br>若要关闭Spark集群，使用如下命令关闭<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu spark-2.3.1-bin-hadoop2.7]# sbin/stop-all.sh </span><br><span class="line">ggstu: stopping org.apache.spark.deploy.worker.Worker</span><br><span class="line">stopping org.apache.spark.deploy.master.Master</span><br></pre></td></tr></table></figure></p><p>到这里Spark2.3.1版本伪分布模式的配置，以及启动关闭就介绍完了。</p><p>如果在安装过程中遇到什么问题，欢迎评论。<br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;br&gt;&lt;br&gt;部署Spark的伪分布环境，需要一台Linux机器，首先要有一些准备工作，就是配置Hadoop的伪分布环境。&lt;br&gt;如果不清楚如何配置Hadoop的伪分布环境，点击如下链接进行配置：&lt;br&gt;&lt;a href=&quot;https://www.ggstu.com/2018/08/31/Hadoop2-X%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%EF%BC%88%E4%B8%89%EF%BC%89%E4%BC%AA%E5%88%86%E5%B8%83%E6%A8%A1%E5%BC%8F/&quot; target=&quot;_blank&quot;&gt;Hadoop2.X的安装与配置（伪分布模式）&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;配置完Hadoop伪分布环境后，接下来开始安装配置Spark2.3.1版本伪分布模式，这里部署的伪分布模式是standalone模式。&lt;br&gt;
     
     </summary>
     
