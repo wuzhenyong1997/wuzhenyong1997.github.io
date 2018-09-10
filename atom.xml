@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.ggstu.com/"/>
-  <updated>2018-09-10T01:34:47.895Z</updated>
+  <updated>2018-09-10T01:58:12.196Z</updated>
   <id>https://www.ggstu.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spark中transformation的join算子的使用（Scala代码）</title>
+    <link href="https://www.ggstu.com/2018/09/10/Spark%E4%B8%ADtransformation%E7%9A%84join%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Scala%E4%BB%A3%E7%A0%81%EF%BC%89/"/>
+    <id>https://www.ggstu.com/2018/09/10/Spark中transformation的join算子的使用（Scala代码）/</id>
+    <published>2018-09-10T01:41:04.000Z</published>
+    <updated>2018-09-10T01:58:12.196Z</updated>
+    
+    <content type="html"><![CDATA[<p>在<a href="https://www.ggstu.com/2018/09/10/Spark%E4%B8%ADtransformation%E7%9A%84join%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/" target="_blank">Spark中transformation的join算子的使用（Java代码）</a>这篇文章中用Java代码实现了join算子打印出学生成绩，这里使用同样的例子，用Scala来开发。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.spark.SparkConf</span><br><span class="line">import org.apache.spark.SparkContext</span><br><span class="line"></span><br><span class="line">object JoinTest &#123;</span><br><span class="line">  def main(args:Array[String])&#123;</span><br><span class="line">    val conf = new SparkConf()</span><br><span class="line">      .setAppName(&quot;JoinTest&quot;)</span><br><span class="line">      .setMaster(&quot;local&quot;)</span><br><span class="line">      </span><br><span class="line">    val sc = new SparkContext(conf)</span><br><span class="line">  </span><br><span class="line">    val nameList = Array(</span><br><span class="line">      Tuple2(1, &quot;Tom&quot;),</span><br><span class="line">      Tuple2(2, &quot;Bob&quot;),</span><br><span class="line">      Tuple2(3, &quot;Alice&quot;),</span><br><span class="line">      Tuple2(4, &quot;Jack&quot;),</span><br><span class="line">      Tuple2(5, &quot;Jerry&quot;)</span><br><span class="line">    )</span><br><span class="line">    val scoreList = Array(</span><br><span class="line">      Tuple2(1, 80),</span><br><span class="line">      Tuple2(2, 75),</span><br><span class="line">      Tuple2(3, 92),</span><br><span class="line">      Tuple2(4, 85),</span><br><span class="line">      Tuple2(5, 60)</span><br><span class="line">    )</span><br><span class="line">    </span><br><span class="line">    val names = sc.parallelize(nameList)</span><br><span class="line">    val scores = sc.parallelize(scoreList)</span><br><span class="line">    </span><br><span class="line">    val studentScore = names.join(scores)</span><br><span class="line">    </span><br><span class="line">    studentScore.foreach&#123;t =&gt;</span><br><span class="line">      println(&quot;ID:&quot;+t._1+ &quot;\t&quot; +&quot;Name:&quot;+t._2._1+ &quot;\t&quot; +&quot;Score:&quot;+t._2._2)</span><br><span class="line">      println(&quot;********************************&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地Scala IDE执行后，得到如下结果，即，使用join打印出学生成绩<br><img src="http://pd8lpasbc.bkt.clouddn.com/64-1.png" width="60%" height="60%"><br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在&lt;a href=&quot;https://www.ggstu.com/2018/09/10/Spark%E4%B8%ADtransformation%E7%9A%84join%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/&quot; target=&quot;_blank&quot;&gt;Spark中transformation的join算子的使用（Java代码）&lt;/a&gt;这篇文章中用Java代码实现了join算子打印出学生成绩，这里使用同样的例子，用Scala来开发。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+    
+    
+      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+    
+      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
+    
+  </entry>
   
   <entry>
     <title>Spark中transformation的join算子的使用（Java代码）</title>
@@ -468,28 +492,6 @@
       <category term="Java" scheme="https://www.ggstu.com/tags/Java/"/>
     
       <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>林润故居</title>
-    <link href="https://www.ggstu.com/2018/09/02/%E6%9E%97%E6%B6%A6%E6%95%85%E5%B1%85/"/>
-    <id>https://www.ggstu.com/2018/09/02/林润故居/</id>
-    <published>2018-09-01T23:50:23.000Z</published>
-    <updated>2018-09-01T14:57:39.213Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近查看了下邮件，发现了我第一封发送的邮件。那是在高一，老师布置的语文作业，写一篇小几百字的描述校园一角的文章，写完后邮箱发给老师。就这样，它被存下来了。<br><a id="more"></a><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<font size="4"><b>温暖古朴的校园一角</b></font></p><p>&emsp;&emsp;从校外的栅栏往里望，看到了绿茵草地点缀着校园,看到了崭新建筑装饰着校园，看到了彩蝶扑粉美丽了校园。但是槛外人是不会发现，在那，在校园的一角，还有着一个“与世隔绝”的地方。那是古朴的林润故居。</p><p>&emsp;&emsp;首先吸引我眼球的不是它老式的建筑形式，而是从矮矮的墙头冒出的一簇花，“一枝红杏出墙来”，红色的花朵安静地守在故居的身边。即使红色是热烈奔放的象征，但它与古朴的小屋结合起来，又有与众不同的感觉。故居周围的树都不是很高大，或许是为了让这校园一角更多地展现在人们的眼前，以至于不被人们忽视。</p><p>&emsp;&emsp;推开木制的门，历史的气息扑面而来，脚下却被高高的门槛所绊到，门槛这么高，应该是为了防止雨天雨水涌入屋内所设计的。跨进屋内，首先映入眼帘的是大门对面一扇扇带孔的门，手从一扇扇门前划过，触摸到了历史的气息。从他们的建筑中我看到了那一代人的智慧，故居正门前的那个地方是被设计成低平的，角落处还有一个小洞通到屋外，这样无论雨下得多大，雨水都会流到这个低处，再顺着洞流出去。走进正屋，看着门前的几根木柱，有的掉了一小层皮，留下了岁月的痕迹。屋内的光线虽然不亮，但还是可以清楚地看到林润的雕像被放在了屋子的正中央，左右两侧还有一对金色的对联。环顾周围的一切，其实它的空间很小，大概只有一间教室的大小，但是小也有它的好处，能够营造一种温暖的感觉，家的味道。</p><p>&emsp;&emsp;踏出门槛，掩上木门，看着眼前一排排整齐的现代建筑，与身后的林润故居可是天壤之别，但是校园内有了这一角故居，更会给人温暖的感觉。门口的水泥道路，在林润故居的陪衬下，更是大家茶余饭后散步的绝佳地带。有了这古朴的一角，才更有温暖的感觉。</p><p>&emsp;&emsp;古朴的林润故居，你虽然占据的仅是校园的一角，带来的却是无穷的温暖。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近查看了下邮件，发现了我第一封发送的邮件。那是在高一，老师布置的语文作业，写一篇小几百字的描述校园一角的文章，写完后邮箱发给老师。就这样，它被存下来了。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="随便说说" scheme="https://www.ggstu.com/categories/%E9%9A%8F%E4%BE%BF%E8%AF%B4%E8%AF%B4/"/>
-    
-    
-      <category term="心情" scheme="https://www.ggstu.com/tags/%E5%BF%83%E6%83%85/"/>
     
   </entry>
   
