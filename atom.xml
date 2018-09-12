@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.ggstu.com/"/>
-  <updated>2018-09-12T05:06:15.549Z</updated>
+  <updated>2018-09-12T05:24:11.954Z</updated>
   <id>https://www.ggstu.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spark中action的take算子的使用（Java代码）</title>
+    <link href="https://www.ggstu.com/2018/09/12/Spark%E4%B8%ADaction%E7%9A%84take%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/"/>
+    <id>https://www.ggstu.com/2018/09/12/Spark中action的take算子的使用（Java代码）/</id>
+    <published>2018-09-12T05:11:36.000Z</published>
+    <updated>2018-09-12T05:24:11.954Z</updated>
+    
+    <content type="html"><![CDATA[<p>在spark官方文档中，对take算子的描述如下所示<br><img src="http://pd8lpasbc.bkt.clouddn.com/73-1.png" width="90%" height="90%"><br>返回一个由数据集的前n个元素组成的数组<br><a id="more"></a><br>例如：获取集合中的前3个元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import org.apache.spark.SparkConf;</span><br><span class="line">import org.apache.spark.api.java.JavaRDD;</span><br><span class="line">import org.apache.spark.api.java.JavaSparkContext;</span><br><span class="line"></span><br><span class="line">public class TakeTest &#123;</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">SparkConf conf = new SparkConf()</span><br><span class="line">.setAppName(&quot;TakeTest&quot;)</span><br><span class="line">.setMaster(&quot;local&quot;);</span><br><span class="line"></span><br><span class="line">JavaSparkContext sc = new JavaSparkContext(conf);</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; nameList = Arrays.asList(&quot;Tom&quot;,&quot;Bob&quot;,&quot;Alice&quot;,&quot;Jack&quot;,&quot;Jerry&quot;);</span><br><span class="line"></span><br><span class="line">JavaRDD&lt;String&gt; names = sc.parallelize(nameList);</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; top3Names = names.take(3);</span><br><span class="line"></span><br><span class="line">for(String name : top3Names) &#123;</span><br><span class="line">System.out.println(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sc.close();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地IDE执行后，得到如下结果，即，使用take算子获取集合中的前3个元素<br><img src="http://pd8lpasbc.bkt.clouddn.com/73-2.png" width="50%" height="50%"><br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在spark官方文档中，对take算子的描述如下所示&lt;br&gt;&lt;img src=&quot;http://pd8lpasbc.bkt.clouddn.com/73-1.png&quot; width=&quot;90%&quot; height=&quot;90%&quot;&gt;&lt;br&gt;返回一个由数据集的前n个元素组成的数组&lt;br&gt;
+    
+    </summary>
+    
+      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+    
+    
+      <category term="Java" scheme="https://www.ggstu.com/tags/Java/"/>
+    
+      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
+    
+  </entry>
   
   <entry>
     <title>Spark中action的count算子的使用（Scala代码）</title>
@@ -467,30 +491,6 @@
     
     
       <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
-    
-      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spark中transformation的filter算子的使用（Java代码）</title>
-    <link href="https://www.ggstu.com/2018/09/06/Spark%E4%B8%ADtransformation%E7%9A%84filter%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/"/>
-    <id>https://www.ggstu.com/2018/09/06/Spark中transformation的filter算子的使用（Java代码）/</id>
-    <published>2018-09-06T02:54:46.000Z</published>
-    <updated>2018-09-06T03:21:00.283Z</updated>
-    
-    <content type="html"><![CDATA[<p>在spark官方文档中，对filter算子的描述如下所示<br><img src="http://pd8lpasbc.bkt.clouddn.com/53-1.png" width="100%" height="100%"><br>意思就是，返回一个新的RDD，该RDD由经过func函数计算后返回值为true的输入元素组成<br><a id="more"></a><br>例如：过滤出集合中的所有偶数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import org.apache.spark.SparkConf;</span><br><span class="line">import org.apache.spark.api.java.JavaRDD;</span><br><span class="line">import org.apache.spark.api.java.JavaSparkContext;</span><br><span class="line">import org.apache.spark.api.java.function.Function;</span><br><span class="line">import org.apache.spark.api.java.function.VoidFunction;</span><br><span class="line"></span><br><span class="line">public class FilterTest &#123;</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">SparkConf conf = new SparkConf()</span><br><span class="line">.setAppName(&quot;FilterTest&quot;)</span><br><span class="line">.setMaster(&quot;local&quot;);</span><br><span class="line"></span><br><span class="line">JavaSparkContext sc = new JavaSparkContext(conf);</span><br><span class="line"></span><br><span class="line">List&lt;Integer&gt; numbers = Arrays.asList(1,2,3,4,5,6,7,8,9,10);</span><br><span class="line"></span><br><span class="line">JavaRDD&lt;Integer&gt; numberRDD = sc.parallelize(numbers);</span><br><span class="line"></span><br><span class="line">JavaRDD&lt;Integer&gt; resultRDD = numberRDD.filter(new Function&lt;Integer, Boolean&gt;() &#123;</span><br><span class="line">private static final long serialVersionUID = 1L;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public Boolean call(Integer num) throws Exception &#123;</span><br><span class="line">return num%2 == 0;</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">resultRDD.foreach(new VoidFunction&lt;Integer&gt;() &#123;</span><br><span class="line">private static final long serialVersionUID = 1L;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void call(Integer res) throws Exception &#123;</span><br><span class="line">System.out.println(res);</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">sc.close();</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地IDE执行后，得到如下结果，即，使用filter操作过滤出一个集合中的所有偶数<br><img src="http://pd8lpasbc.bkt.clouddn.com/53-2.png" width="50%" height="50%"><br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在spark官方文档中，对filter算子的描述如下所示&lt;br&gt;&lt;img src=&quot;http://pd8lpasbc.bkt.clouddn.com/53-1.png&quot; width=&quot;100%&quot; height=&quot;100%&quot;&gt;&lt;br&gt;意思就是，返回一个新的RDD，该RDD由经过func函数计算后返回值为true的输入元素组成&lt;br&gt;
-    
-    </summary>
-    
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
-    
-    
-      <category term="Java" scheme="https://www.ggstu.com/tags/Java/"/>
     
       <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
     
