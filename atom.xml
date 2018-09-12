@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.ggstu.com/"/>
-  <updated>2018-09-11T15:19:28.592Z</updated>
+  <updated>2018-09-12T00:25:13.616Z</updated>
   <id>https://www.ggstu.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spark中action的reduce算子的使用（Scala代码）</title>
+    <link href="https://www.ggstu.com/2018/09/12/Spark%E4%B8%ADaction%E7%9A%84reduce%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Scala%E4%BB%A3%E7%A0%81%EF%BC%89/"/>
+    <id>https://www.ggstu.com/2018/09/12/Spark中action的reduce算子的使用（Scala代码）/</id>
+    <published>2018-09-11T23:57:59.000Z</published>
+    <updated>2018-09-12T00:25:13.616Z</updated>
+    
+    <content type="html"><![CDATA[<p>在<a href="https://www.ggstu.com/2018/09/11/Spark%E4%B8%ADaction%E7%9A%84reduce%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/" target="_blank">Spark中action的reduce算子的使用（Java代码）</a>这篇文章中用Java代码实现了reduce算子累加1到100，这里使用同样的例子，用Scala来开发。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.spark.SparkConf</span><br><span class="line">import org.apache.spark.SparkContext</span><br><span class="line">import scala.collection.mutable.ArrayBuffer</span><br><span class="line"></span><br><span class="line">object ReduceTest &#123;</span><br><span class="line">  def main(args:Array[String])&#123;</span><br><span class="line">    val conf = new SparkConf()</span><br><span class="line">        .setAppName(&quot;ReduceTest&quot;)</span><br><span class="line">        .setMaster(&quot;local&quot;)</span><br><span class="line">        </span><br><span class="line">    val sc = new SparkContext(conf)</span><br><span class="line">    </span><br><span class="line">    var numberArray = ArrayBuffer[Int]()</span><br><span class="line">    for(i &lt;- 1 to 100)&#123;</span><br><span class="line">      numberArray += i </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    val numbers = sc.parallelize(numberArray)</span><br><span class="line">    </span><br><span class="line">    val sum = numbers.reduce(_ + _)</span><br><span class="line">    </span><br><span class="line">    println(&quot;1+2+3+...+100 = &quot; + sum)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地Scala IDE执行后，得到如下结果，即，使用reduce算子累加1到100<br><img src="http://pd8lpasbc.bkt.clouddn.com/68-1.png" width="50%" height="50%"><br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在&lt;a href=&quot;https://www.ggstu.com/2018/09/11/Spark%E4%B8%ADaction%E7%9A%84reduce%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/&quot; target=&quot;_blank&quot;&gt;Spark中action的reduce算子的使用（Java代码）&lt;/a&gt;这篇文章中用Java代码实现了reduce算子累加1到100，这里使用同样的例子，用Scala来开发。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+    
+    
+      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+    
+      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
+    
+  </entry>
   
   <entry>
     <title>Spark中action的reduce算子的使用（Java代码）</title>
@@ -465,31 +489,6 @@
     
       <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
     
-    
-      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spark创建RDD的几种方式（Scala代码）</title>
-    <link href="https://www.ggstu.com/2018/09/03/Spark%E5%88%9B%E5%BB%BARDD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%88Scala%E4%BB%A3%E7%A0%81%EF%BC%89/"/>
-    <id>https://www.ggstu.com/2018/09/03/Spark创建RDD的几种方式（Scala代码）/</id>
-    <published>2018-09-03T11:01:43.000Z</published>
-    <updated>2018-09-03T12:54:21.008Z</updated>
-    
-    <content type="html"><![CDATA[<p>在<a href="https://www.ggstu.com/2018/09/03/Spark%E5%88%9B%E5%BB%BARDD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/" target="_blank">Spark创建RDD的几种方式（Java代码）</a>这篇文章中介绍了Spark创建RDD的三种方式的Java代码。<br>下面介绍Scala版本的创建RDD，直接上代码。</p><p><font size="4"><b>并行化集合创建RDD</b></font><br>例如：累加1到10<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.spark.SparkConf</span><br><span class="line">import org.apache.spark.SparkContext</span><br><span class="line"></span><br><span class="line">object ParallelizeCollection &#123;</span><br><span class="line">  def main(args:Array[String])&#123;</span><br><span class="line">    val conf = new SparkConf()</span><br><span class="line">          .setAppName(&quot;ParallelizeCollection&quot;)</span><br><span class="line">          .setMaster(&quot;local&quot;)</span><br><span class="line">          </span><br><span class="line">    val sc = new SparkContext(conf)</span><br><span class="line">    </span><br><span class="line">    val numbers = Array(1,2,3,4,5,6,7,8,9,10)</span><br><span class="line">    </span><br><span class="line">    val numberRDD = sc.parallelize(numbers)</span><br><span class="line">    </span><br><span class="line">    val sum = numberRDD.reduce(_ + _)</span><br><span class="line">    </span><br><span class="line">    println(&quot;1+2+3+......+10 = &quot; + sum)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地Scala IDE运行程序，在控制台上看到如下所示的结果<br><img src="http://pd8lpasbc.bkt.clouddn.com/48-1.png" width="60%" height="60%"><br><br></p><p><font size="4"><b>使用本地文件创建RDD</b></font><br>例如：累加1到10<br>我在本地桌面上创建了个文本文件，文件内容为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 2 3 4 5 6 7 8 9 10</span><br></pre></td></tr></table></figure></p><p>代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.spark.SparkConf</span><br><span class="line">import org.apache.spark.SparkContext</span><br><span class="line"></span><br><span class="line">object LocalFile &#123;</span><br><span class="line">  def main(args:Array[String])&#123;</span><br><span class="line">    val conf = new SparkConf()</span><br><span class="line">          .setAppName(&quot;LocalFile&quot;)</span><br><span class="line">          .setMaster(&quot;local&quot;)</span><br><span class="line">          </span><br><span class="line">    val sc = new SparkContext(conf)</span><br><span class="line">    </span><br><span class="line">    val lines = sc.textFile(&quot;C://Users//asus//Desktop//test.txt&quot;)</span><br><span class="line">    </span><br><span class="line">    val nums = lines.flatMap(line =&gt; line.split(&quot; &quot;))</span><br><span class="line">    </span><br><span class="line">    val numsToInt = nums.map(num =&gt; num.toInt)</span><br><span class="line">    </span><br><span class="line">    val sum = numsToInt.reduce(_ + _)</span><br><span class="line">    </span><br><span class="line">    println(&quot;1+2+3+4+......+10 = &quot; + sum)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地Scala IDE运行程序，在控制台上看到如下所示的结果<br><img src="http://pd8lpasbc.bkt.clouddn.com/48-2.png" width="60%" height="60%"><br><br></p><p><font size="4"><b>使用HDFS文件创建RDD</b></font><br>例如：累加1到10<br>在Linux上创建文本文件，文件内容如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu ~]# cd input/</span><br><span class="line">[root@ggstu input]# cat test.txt </span><br><span class="line">1 2 3 4 5 6 7 8 9 10</span><br></pre></td></tr></table></figure></p><p>启动hadoop集群，将test.txt上传到hdfs上<br>接着启动spark集群<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@ggstu input]# hdfs dfs -put test.txt /test.txt</span><br><span class="line">[root@ggstu input]# hdfs dfs -ls /</span><br><span class="line">Found 1 items</span><br><span class="line">-rw-r--r--   1 root supergroup         21 2018-09-03 20:43 /test.txt</span><br></pre></td></tr></table></figure></p><p>代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.spark.SparkConf</span><br><span class="line">import org.apache.spark.SparkContext</span><br><span class="line"></span><br><span class="line">object HDFSFile &#123;</span><br><span class="line">  def main(args:Array[String])&#123;</span><br><span class="line">    val conf = new SparkConf()</span><br><span class="line">          .setAppName(&quot;HDFSFile&quot;)</span><br><span class="line">          </span><br><span class="line">    val sc = new SparkContext(conf)</span><br><span class="line">    </span><br><span class="line">    val lines = sc.textFile(&quot;hdfs://ggstu:9000/test.txt&quot;)</span><br><span class="line">    </span><br><span class="line">    val nums = lines.flatMap(line =&gt; line.split(&quot; &quot;))</span><br><span class="line">    </span><br><span class="line">    val numsToInt = nums.map(num =&gt; num.toInt)</span><br><span class="line">    </span><br><span class="line">    val sum = numsToInt.reduce(_ + _)</span><br><span class="line">    </span><br><span class="line">    println(&quot;1+2+3+4+5+......+10 = &quot; + sum)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>将程序打包成jar包，并上传到Linux上，之后执行执行脚本。<br>如果这几步不懂，在<a href="https://www.ggstu.com/2018/09/02/%E4%BD%BF%E7%94%A8Scala%E5%BC%80%E5%8F%91Spark%E7%9A%84wordcount%E7%A8%8B%E5%BA%8F/" target="_blank">使用Scala开发Spark的wordcount程序</a>这篇文章中有详细过程。<br>执行脚本结果如下<br><img src="http://pd8lpasbc.bkt.clouddn.com/48-3.png" width="50%" height="50%"><br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在&lt;a href=&quot;https://www.ggstu.com/2018/09/03/Spark%E5%88%9B%E5%BB%BARDD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/&quot; target=&quot;_blank&quot;&gt;Spark创建RDD的几种方式（Java代码）&lt;/a&gt;这篇文章中介绍了Spark创建RDD的三种方式的Java代码。&lt;br&gt;下面介绍Scala版本的创建RDD，直接上代码。&lt;/p&gt;
-&lt;p&gt;&lt;font size=&quot;4&quot;&gt;&lt;b&gt;并行化集合创建RDD&lt;/b&gt;&lt;/font&gt;&lt;br&gt;例如：累加1到10&lt;br&gt;
-    
-    </summary>
-    
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
-    
-    
-      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
     
       <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
     
