@@ -4,6 +4,50 @@
 
     
   <url>
+    <loc>https://www.ggstu.com/2018/09/12/Spark%E4%B8%ADaction%E7%9A%84saveAsTextFile%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Scala%E4%BB%A3%E7%A0%81%EF%BC%89/</loc>
+    <lastmod>2018-09-12T12:00:44.323Z</lastmod>
+    <data>
+        <display>
+        <title>Spark中action的saveAsTextFile算子的使用（Scala代码）</title>
+        <pubTime>2018-09-12T11:03:54.000Z</pubTime>
+        
+        <tag>Scala</tag>
+         
+        <tag>Spark</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术文章" url="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://www.ggstu.com/2018/09/12/Spark%E4%B8%ADaction%E7%9A%84collect%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Scala%E4%BB%A3%E7%A0%81%EF%BC%89/</loc>
+    <lastmod>2018-09-12T11:05:50.019Z</lastmod>
+    <data>
+        <display>
+        <title>Spark中action的collect算子的使用（Scala代码）</title>
+        <pubTime>2018-09-12T01:19:32.000Z</pubTime>
+        
+        <tag>Scala</tag>
+         
+        <tag>Spark</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术文章" url="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://www.ggstu.com/2018/09/12/Spark%E4%B8%ADaction%E7%9A%84saveAsTextFile%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/</loc>
     <lastmod>2018-09-12T07:11:14.260Z</lastmod>
     <data>
@@ -100,28 +144,6 @@
         <pubTime>2018-09-12T04:24:15.000Z</pubTime>
         
         <tag>Java</tag>
-         
-        <tag>Spark</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术文章" url="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://www.ggstu.com/2018/09/12/Spark%E4%B8%ADaction%E7%9A%84collect%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Scala%E4%BB%A3%E7%A0%81%EF%BC%89/</loc>
-    <lastmod>2018-09-12T01:52:32.466Z</lastmod>
-    <data>
-        <display>
-        <title>Spark中action的collect算子的使用（Scala代码）</title>
-        <pubTime>2018-09-12T01:19:32.000Z</pubTime>
-        
-        <tag>Scala</tag>
          
         <tag>Spark</tag>
          
@@ -870,9 +892,9 @@
         <title>Linux下（CentOS7）安装与配置JDK1.8（上传安装方式）</title>
         <pubTime>2018-08-30T03:31:05.000Z</pubTime>
         
-        <tag>Linux</tag>
-         
         <tag>Java</tag>
+         
+        <tag>Linux</tag>
          
          
            
@@ -892,9 +914,9 @@
         <title>Linux下（CentOS7）安装与配置JDK1.8（wget命令安装方式）</title>
         <pubTime>2018-08-30T02:13:31.000Z</pubTime>
         
-        <tag>Linux</tag>
-         
         <tag>Java</tag>
+         
+        <tag>Linux</tag>
          
          
            
