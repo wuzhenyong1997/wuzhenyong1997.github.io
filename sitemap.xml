@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.ggstu.com/2018/09/13/Spark%E4%B8%ADaction%E7%9A%84foreach%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/</loc>
+    
+    <lastmod>2018-09-13T06:14:26.125Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.ggstu.com/2018/09/13/Spark%E4%B8%ADaction%E7%9A%84countByKey%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Scala%E4%BB%A3%E7%A0%81%EF%BC%89/</loc>
     
     <lastmod>2018-09-13T01:16:24.720Z</lastmod>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.ggstu.com/"/>
-  <updated>2018-09-13T01:16:24.720Z</updated>
+  <updated>2018-09-13T06:14:26.125Z</updated>
   <id>https://www.ggstu.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spark中action的foreach算子的使用（Java代码）</title>
+    <link href="https://www.ggstu.com/2018/09/13/Spark%E4%B8%ADaction%E7%9A%84foreach%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/"/>
+    <id>https://www.ggstu.com/2018/09/13/Spark中action的foreach算子的使用（Java代码）/</id>
+    <published>2018-09-13T05:32:19.000Z</published>
+    <updated>2018-09-13T06:14:26.125Z</updated>
+    
+    <content type="html"><![CDATA[<p>在spark官方文档中，对foreach算子的描述如下所示<br><img src="http://pd8lpasbc.bkt.clouddn.com/79-1.png" width="100%" height="100%"><br>在数据集的每个元素上，运行func函数进行更新<br><a id="more"></a><br>例如：遍历集合中的每个元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import org.apache.spark.SparkConf;</span><br><span class="line">import org.apache.spark.api.java.JavaRDD;</span><br><span class="line">import org.apache.spark.api.java.JavaSparkContext;</span><br><span class="line">import org.apache.spark.api.java.function.VoidFunction;</span><br><span class="line"></span><br><span class="line">public class ForeachTest &#123;</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">SparkConf conf = new SparkConf()</span><br><span class="line">.setAppName(&quot;ForeachTest&quot;)</span><br><span class="line">.setMaster(&quot;local&quot;);</span><br><span class="line"></span><br><span class="line">JavaSparkContext sc = new JavaSparkContext(conf);</span><br><span class="line"></span><br><span class="line">List&lt;Integer&gt; numberList = Arrays.asList(1,2,3,4,5);</span><br><span class="line"></span><br><span class="line">JavaRDD&lt;Integer&gt; numbers = sc.parallelize(numberList);</span><br><span class="line"></span><br><span class="line">numbers.foreach(new VoidFunction&lt;Integer&gt;() &#123;</span><br><span class="line">private static final long serialVersionUID = 1L;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void call(Integer num) throws Exception &#123;</span><br><span class="line">System.out.println(num);</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">sc.close();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地IDE执行后，得到如下结果，即，使用foreach算子遍历集合中的每个元素<br><img src="http://pd8lpasbc.bkt.clouddn.com/79-2.png" width="50%" height="50%"><br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在spark官方文档中，对foreach算子的描述如下所示&lt;br&gt;&lt;img src=&quot;http://pd8lpasbc.bkt.clouddn.com/79-1.png&quot; width=&quot;100%&quot; height=&quot;100%&quot;&gt;&lt;br&gt;在数据集的每个元素上，运行func函数进行更新&lt;br&gt;
+    
+    </summary>
+    
+      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+    
+    
+      <category term="Java" scheme="https://www.ggstu.com/tags/Java/"/>
+    
+      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
+    
+  </entry>
   
   <entry>
     <title>Spark中action的countByKey算子的使用（Scala代码）</title>
@@ -467,30 +491,6 @@
     
     
       <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
-    
-      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spark中transformation的reduceByKey算子的使用（Java代码）</title>
-    <link href="https://www.ggstu.com/2018/09/08/Spark%E4%B8%ADtransformation%E7%9A%84reduceByKey%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/"/>
-    <id>https://www.ggstu.com/2018/09/08/Spark中transformation的reduceByKey算子的使用（Java代码）/</id>
-    <published>2018-09-08T05:25:40.000Z</published>
-    <updated>2018-09-08T11:49:54.517Z</updated>
-    
-    <content type="html"><![CDATA[<p>在spark官方文档中，对reduceByKey算子的描述如下所示<br><img src="http://pd8lpasbc.bkt.clouddn.com/59-1.png" width="100%" height="100%"><br>在一个(K,V)的RDD上调用，返回一个(K,V)的RDD，使用指定的reduce函数，将相同key的值聚合到一起，与groupByKey类似，reduce任务的个数可以通过第二个可选的参数来设置<br><a id="more"></a><br>例如：统计每个学生的成绩总分<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import org.apache.spark.SparkConf;</span><br><span class="line">import org.apache.spark.api.java.JavaPairRDD;</span><br><span class="line">import org.apache.spark.api.java.JavaSparkContext;</span><br><span class="line">import org.apache.spark.api.java.function.Function2;</span><br><span class="line">import org.apache.spark.api.java.function.VoidFunction;</span><br><span class="line"></span><br><span class="line">import scala.Tuple2;</span><br><span class="line"></span><br><span class="line">public class ReduceByKeyTest &#123;</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">SparkConf conf = new SparkConf()</span><br><span class="line">.setAppName(&quot;ReduceByKeyTest&quot;)</span><br><span class="line">.setMaster(&quot;local&quot;);</span><br><span class="line"></span><br><span class="line">JavaSparkContext sc = new JavaSparkContext(conf);</span><br><span class="line"></span><br><span class="line">List&lt;Tuple2&lt;String,Integer&gt;&gt; scoreList = Arrays.asList(</span><br><span class="line">new Tuple2&lt;String,Integer&gt;(&quot;Tom&quot;, 85),</span><br><span class="line">new Tuple2&lt;String,Integer&gt;(&quot;Bob&quot;, 75),</span><br><span class="line">new Tuple2&lt;String,Integer&gt;(&quot;Alice&quot;, 92),</span><br><span class="line">new Tuple2&lt;String,Integer&gt;(&quot;Tom&quot;, 70),</span><br><span class="line">new Tuple2&lt;String,Integer&gt;(&quot;Bob&quot;, 95),</span><br><span class="line">new Tuple2&lt;String,Integer&gt;(&quot;Alice&quot;, 80)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">JavaPairRDD&lt;String, Integer&gt; scores = sc.parallelizePairs(scoreList);</span><br><span class="line"></span><br><span class="line">JavaPairRDD&lt;String, Integer&gt; totalScore = scores.reduceByKey(new Function2&lt;Integer, Integer, Integer&gt;() &#123;</span><br><span class="line">private static final long serialVersionUID = 1L;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public Integer call(Integer score1, Integer score2) throws Exception &#123;</span><br><span class="line">return score1 + score2;</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">totalScore.foreach(new VoidFunction&lt;Tuple2&lt;String,Integer&gt;&gt;() &#123;</span><br><span class="line">private static final long serialVersionUID = 1L;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void call(Tuple2&lt;String, Integer&gt; score) throws Exception &#123;</span><br><span class="line">System.out.println(&quot;Name: &quot; + score._1);</span><br><span class="line">System.out.println(&quot;Total Score: &quot; + score._2);</span><br><span class="line">System.out.println(&quot;**************************&quot;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">sc.close();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地IDE执行后，得到如下结果，即，使用reduceByKey统计出每个学生的成绩总分<br><img src="http://pd8lpasbc.bkt.clouddn.com/59-2.png" width="60%" height="60%"><br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在spark官方文档中，对reduceByKey算子的描述如下所示&lt;br&gt;&lt;img src=&quot;http://pd8lpasbc.bkt.clouddn.com/59-1.png&quot; width=&quot;100%&quot; height=&quot;100%&quot;&gt;&lt;br&gt;在一个(K,V)的RDD上调用，返回一个(K,V)的RDD，使用指定的reduce函数，将相同key的值聚合到一起，与groupByKey类似，reduce任务的个数可以通过第二个可选的参数来设置&lt;br&gt;
-    
-    </summary>
-    
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
-    
-    
-      <category term="Java" scheme="https://www.ggstu.com/tags/Java/"/>
     
       <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
     
