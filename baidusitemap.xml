@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://www.ggstu.com/2018/09/14/Spark%E4%B8%ADRDD%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96/</loc>
+    <lastmod>2018-09-14T15:38:02.773Z</lastmod>
+    <data>
+        <display>
+        <title>Spark中RDD的持久化</title>
+        <pubTime>2018-09-14T06:20:41.000Z</pubTime>
+        
+        <tag>Spark</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术文章" url="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://www.ggstu.com/2018/09/13/Spark%E7%9A%84%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2018-09-14T04:13:38.960Z</lastmod>
     <data>
@@ -1000,9 +1020,9 @@
         <title>Linux下（CentOS7）安装与配置JDK1.8（上传安装方式）</title>
         <pubTime>2018-08-30T03:31:05.000Z</pubTime>
         
-        <tag>Linux</tag>
-         
         <tag>Java</tag>
+         
+        <tag>Linux</tag>
          
          
            
@@ -1022,9 +1042,9 @@
         <title>Linux下（CentOS7）安装与配置JDK1.8（wget命令安装方式）</title>
         <pubTime>2018-08-30T02:13:31.000Z</pubTime>
         
-        <tag>Linux</tag>
-         
         <tag>Java</tag>
+         
+        <tag>Linux</tag>
          
          
            
