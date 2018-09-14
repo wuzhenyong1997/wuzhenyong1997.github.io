@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.ggstu.com/"/>
-  <updated>2018-09-13T13:07:50.316Z</updated>
+  <updated>2018-09-14T04:13:38.960Z</updated>
   <id>https://www.ggstu.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spark的体系架构</title>
+    <link href="https://www.ggstu.com/2018/09/13/Spark%E7%9A%84%E4%BD%93%E7%B3%BB%E6%9E%B6%E6%9E%84/"/>
+    <id>https://www.ggstu.com/2018/09/13/Spark的体系架构/</id>
+    <published>2018-09-13T14:47:28.000Z</published>
+    <updated>2018-09-14T04:13:38.960Z</updated>
+    
+    <content type="html"><![CDATA[<p>Spark应用程序作为集群上的独立进程集运行，由SparkContext主程序中的对象（称为驱动程序）协调。</p><p>具体来说，要在集群上运行，SparkContext可以连接到几种类型的集群管理器（Spark的standalone集群管理器，Mesos或YARN），它们跨应用程序分配资源。连接后，Spark会在集群中的节点上获取执行程序，这些节点是应用程序运行计算和存储数据的进程。接下来，它将应用程序的代码发送给执行程序。最后SparkContext将任务发送给执行程序来运行。<br><a id="more"></a><br>在Spark的官方文档中，Spark的架构图如下所示，我在图上标记了数字，表示执行的顺序<br><img src="http://pd8lpasbc.bkt.clouddn.com/81-2.png" width="100%" height="100%"></p><p><font size="4"><b>各个组件介绍：</b></font><br><b>Driver：</b><br>1、编写的Spark程序就在Driver上，由spark-submit执行；<br>2、运行应用程序的main方法，并创建SparkContext的进程。<br><b>Master(Cluster Manager)：</b><br>1、负责全局的资源管理和分配，包括内存、CPU、网络等等；<br>2、接收客户端Driver提交的任务请求，会发送请求给Worker，进行资源分配；<br>3、支持的类型：Standalone、Apache Mesos、Hadoop YARN。<br><b>Worker：</b><br>每个子节点上的资源管理者，可以由多个Executor组成。<br><b>Executor：</b><br>Worker上应用程序启动的进程，Executor运行任务，并将数据保存在内存或磁盘中。<br><b>Task：</b><br>发送给Executor上的的任务运行的单位。<br><br></p><p><font size="4"><b>执行步骤：</b></font><br>第一步：Driver进程启动，提交任务请求到Master上；<br>第二步：Master接收到客户端Driver提交的任务请求，会将请求发送给Worker，进行资源分配；Worker接收到Master的请求后，为Spark应用程序启动Executor；<br>第三步：Executor启动后，会向Driver进行反注册，这样Driver就知道哪些Executor是为它服务的；<br>第四步：Driver会根据RDD定义的操作，提交task到Executor上；Executor接收到task后，会启动多个线程来执行task。<br><br></p><p><font size="4"><b>监控</b></font><br>每个Driver Program都有一个Web UI，通常在端口4040上显示有关运行任务，执行程序和存储使用情况的信息。只需访问http://&lt;driver-node>:4040，Web浏览器即可访问此UI。<br><br></p><p><font size="4"><b>关于这种架构有几点注意事项：</b></font><br>1、每个应用程序都有自己的执行程序的进程，这些进程在整个应用程序的持续时间内保持不变并在多个线程中运行任务。这样可以在调度方（每个驱动程序调度自己的任务）和执行方（在不同JVM中运行的不同应用程序中的任务）之间隔离应用程序。但是，这也意味着只有将Spark应用程序写入外部存储系统的情况下才能共享数据。</p><p>2、Spark与底层集群管理器无关。只要它可以获取执行程序进程，并且这些进程相互通信，即使在Mesos、YARN等集群管理器上运行它也相对容易。</p><p>3、驱动程序必须在其生命周期内监听并接收来自其执行程序的传入连接。因此，驱动程序必须是Worker节点网络可寻址的。</p><p>4、因为驱动程序在集群上调度任务，所以它应该靠近Worker节点运行，最好是在同一局域网上。如果要远程向集群发送请求，最好让驱动程序打开RPC并让它从附近提交操作，而不是远离Worker节点运行驱动程序。<br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Spark应用程序作为集群上的独立进程集运行，由SparkContext主程序中的对象（称为驱动程序）协调。&lt;/p&gt;
+&lt;p&gt;具体来说，要在集群上运行，SparkContext可以连接到几种类型的集群管理器（Spark的standalone集群管理器，Mesos或YARN），它们跨应用程序分配资源。连接后，Spark会在集群中的节点上获取执行程序，这些节点是应用程序运行计算和存储数据的进程。接下来，它将应用程序的代码发送给执行程序。最后SparkContext将任务发送给执行程序来运行。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+    
+    
+      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
+    
+  </entry>
   
   <entry>
     <title>Spark中action的foreach算子的使用（Scala代码）</title>
@@ -467,30 +490,6 @@
     
     
       <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
-    
-      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spark中transformation的sortByKey算子的使用（Java代码）</title>
-    <link href="https://www.ggstu.com/2018/09/09/Spark%E4%B8%ADtransformation%E7%9A%84sortByKey%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/"/>
-    <id>https://www.ggstu.com/2018/09/09/Spark中transformation的sortByKey算子的使用（Java代码）/</id>
-    <published>2018-09-09T00:01:31.000Z</published>
-    <updated>2018-09-09T00:29:46.285Z</updated>
-    
-    <content type="html"><![CDATA[<p>在spark官方文档中，对sortByKey算子的描述如下所示<br><img src="http://pd8lpasbc.bkt.clouddn.com/61-1.png" width="100%" height="100%"><br>在一个(K,V)的RDD上调用，K必须实现Ordered接口，返回一个按照key进行排序的(K,V)的RDD<br><a id="more"></a><br>例如：对学生成绩进行排序（升序、降序）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import org.apache.spark.SparkConf;</span><br><span class="line">import org.apache.spark.api.java.JavaPairRDD;</span><br><span class="line">import org.apache.spark.api.java.JavaSparkContext;</span><br><span class="line">import org.apache.spark.api.java.function.VoidFunction;</span><br><span class="line"></span><br><span class="line">import scala.Tuple2;</span><br><span class="line"></span><br><span class="line">public class SortByKeyTest &#123;</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">SparkConf conf = new SparkConf()</span><br><span class="line">.setAppName(&quot;SortByKeyTest&quot;)</span><br><span class="line">.setMaster(&quot;local&quot;);</span><br><span class="line"></span><br><span class="line">JavaSparkContext sc = new JavaSparkContext(conf);</span><br><span class="line"></span><br><span class="line">List&lt;Tuple2&lt;Integer, String&gt;&gt; scoreList = Arrays.asList(</span><br><span class="line">new Tuple2&lt;Integer, String&gt;(80, &quot;Tom&quot;),</span><br><span class="line">new Tuple2&lt;Integer, String&gt;(75, &quot;Bob&quot;),</span><br><span class="line">new Tuple2&lt;Integer, String&gt;(92, &quot;Alice&quot;),</span><br><span class="line">new Tuple2&lt;Integer, String&gt;(85, &quot;Jack&quot;),</span><br><span class="line">new Tuple2&lt;Integer, String&gt;(60, &quot;Jerry&quot;)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">JavaPairRDD&lt;Integer, String&gt; scores = sc.parallelizePairs(scoreList);</span><br><span class="line"></span><br><span class="line">JavaPairRDD&lt;Integer, String&gt; sortedScore = scores.sortByKey();</span><br><span class="line"></span><br><span class="line">sortedScore.foreach(new VoidFunction&lt;Tuple2&lt;Integer,String&gt;&gt;() &#123;</span><br><span class="line">private static final long serialVersionUID = 1L;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void call(Tuple2&lt;Integer, String&gt; score) throws Exception &#123;</span><br><span class="line">System.out.println(&quot;Name: &quot; + score._2);</span><br><span class="line">System.out.println(&quot;Score: &quot; + score._1);</span><br><span class="line">System.out.println(&quot;*************************&quot;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">sc.close();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地IDE执行后，得到如下结果，即，使用sortByKey对学生成绩进行升序排序<br><img src="http://pd8lpasbc.bkt.clouddn.com/61-2.png" width="60%" height="60%"></p><p>如果要降序排序，将sortByKey()改成sortByKey(false)即可，修改后结果如下<br><img src="http://pd8lpasbc.bkt.clouddn.com/61-3.png" width="60%" height="60%"><br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在spark官方文档中，对sortByKey算子的描述如下所示&lt;br&gt;&lt;img src=&quot;http://pd8lpasbc.bkt.clouddn.com/61-1.png&quot; width=&quot;100%&quot; height=&quot;100%&quot;&gt;&lt;br&gt;在一个(K,V)的RDD上调用，K必须实现Ordered接口，返回一个按照key进行排序的(K,V)的RDD&lt;br&gt;
-    
-    </summary>
-    
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
-    
-    
-      <category term="Java" scheme="https://www.ggstu.com/tags/Java/"/>
     
       <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
     
