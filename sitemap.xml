@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.ggstu.com/movie/index.html</loc>
+    
+    <lastmod>2018-09-15T06:42:50.960Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.ggstu.com/2018/09/14/Spark%E4%B8%ADRDD%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96/</loc>
     
     <lastmod>2018-09-14T15:38:02.773Z</lastmod>
@@ -180,13 +187,6 @@
     <loc>https://www.ggstu.com/2018/09/07/Spark%E4%B8%ADtransformation%E7%9A%84groupByKey%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/</loc>
     
     <lastmod>2018-09-07T16:27:10.629Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.ggstu.com/movie/index.html</loc>
-    
-    <lastmod>2018-09-07T15:31:49.978Z</lastmod>
     
   </url>
   

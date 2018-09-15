@@ -3,6 +3,7 @@
 
 
     
+    
   <url>
     <loc>https://www.ggstu.com/2018/09/14/Spark%E4%B8%ADRDD%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96/</loc>
     <lastmod>2018-09-14T15:38:02.773Z</lastmod>
@@ -571,7 +572,6 @@
     </url>
 
     
-    
   <url>
     <loc>https://www.ggstu.com/2018/09/07/Spark%E4%B8%ADtransformation%E7%9A%84flatMap%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Scala%E4%BB%A3%E7%A0%81%EF%BC%89/</loc>
     <lastmod>2018-09-07T00:36:58.399Z</lastmod>
@@ -1020,9 +1020,9 @@
         <title>Linux下（CentOS7）安装与配置JDK1.8（上传安装方式）</title>
         <pubTime>2018-08-30T03:31:05.000Z</pubTime>
         
-        <tag>Java</tag>
-         
         <tag>Linux</tag>
+         
+        <tag>Java</tag>
          
          
            
@@ -1042,9 +1042,9 @@
         <title>Linux下（CentOS7）安装与配置JDK1.8（wget命令安装方式）</title>
         <pubTime>2018-08-30T02:13:31.000Z</pubTime>
         
-        <tag>Java</tag>
-         
         <tag>Linux</tag>
+         
+        <tag>Java</tag>
          
          
            
