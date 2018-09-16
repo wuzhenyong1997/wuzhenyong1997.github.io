@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.ggstu.com/"/>
-  <updated>2018-09-16T01:30:25.551Z</updated>
+  <updated>2018-09-16T03:22:14.657Z</updated>
   <id>https://www.ggstu.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spark基于排序机制的wordcount程序（Scala代码）</title>
+    <link href="https://www.ggstu.com/2018/09/16/Spark%E5%9F%BA%E4%BA%8E%E6%8E%92%E5%BA%8F%E6%9C%BA%E5%88%B6%E7%9A%84wordcount%E7%A8%8B%E5%BA%8F%EF%BC%88Scala%E4%BB%A3%E7%A0%81%EF%BC%89/"/>
+    <id>https://www.ggstu.com/2018/09/16/Spark基于排序机制的wordcount程序（Scala代码）/</id>
+    <published>2018-09-16T03:00:33.000Z</published>
+    <updated>2018-09-16T03:22:14.657Z</updated>
+    
+    <content type="html"><![CDATA[<p>在<a href="https://www.ggstu.com/2018/09/16/Spark%E5%9F%BA%E4%BA%8E%E6%8E%92%E5%BA%8F%E6%9C%BA%E5%88%B6%E7%9A%84wordcount%E7%A8%8B%E5%BA%8F%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/" target="_blank">Spark基于排序机制的wordcount程序（Java代码）</a>这篇文章中用Java代码实现了wordcount的排序，这里使用同样的例子，用Scala来开发。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.spark.SparkConf</span><br><span class="line">import org.apache.spark.SparkContext</span><br><span class="line"></span><br><span class="line">object SortWordCount &#123;</span><br><span class="line">  def main(args:Array[String])&#123;</span><br><span class="line">    val conf = new SparkConf()</span><br><span class="line">        .setAppName(&quot;SortWordCount&quot;)</span><br><span class="line">        .setMaster(&quot;local&quot;)</span><br><span class="line">        </span><br><span class="line">    val sc = new SparkContext(conf)</span><br><span class="line">    </span><br><span class="line">    val lines = sc.textFile(&quot;C://Users//asus//Desktop//test.txt&quot;)</span><br><span class="line">    </span><br><span class="line">    val words = lines.flatMap(line =&gt; line.split(&quot; &quot;))</span><br><span class="line">    </span><br><span class="line">    val pairs = words.map(word =&gt; (word,1))</span><br><span class="line">    </span><br><span class="line">    val wordCount = pairs.reduceByKey(_ + _)</span><br><span class="line">    </span><br><span class="line">    val countWord = wordCount.map(t =&gt; (t._2,t._1))</span><br><span class="line">    </span><br><span class="line">    val sortCountWord = countWord.sortByKey(false)</span><br><span class="line">    </span><br><span class="line">    val sortWordCount = sortCountWord.map(t =&gt; (t._2,t._1))</span><br><span class="line">    </span><br><span class="line">    sortWordCount.foreach(t =&gt; println(t._1 + &quot;: &quot; + t._2))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地Scala IDE执行后，得到如下结果，即，实现了基于排序机制的wordcount程序<br><img src="http://pd8lpasbc.bkt.clouddn.com/85-1.png" width="50%" height="50%"><br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在&lt;a href=&quot;https://www.ggstu.com/2018/09/16/Spark%E5%9F%BA%E4%BA%8E%E6%8E%92%E5%BA%8F%E6%9C%BA%E5%88%B6%E7%9A%84wordcount%E7%A8%8B%E5%BA%8F%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/&quot; target=&quot;_blank&quot;&gt;Spark基于排序机制的wordcount程序（Java代码）&lt;/a&gt;这篇文章中用Java代码实现了wordcount的排序，这里使用同样的例子，用Scala来开发。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+    
+    
+      <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
+    
+      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
+    
+  </entry>
   
   <entry>
     <title>Spark基于排序机制的wordcount程序（Java代码）</title>
@@ -463,30 +487,6 @@
     
     
       <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
-    
-      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spark中transformation的cogroup算子的使用（Java代码）</title>
-    <link href="https://www.ggstu.com/2018/09/10/Spark%E4%B8%ADtransformation%E7%9A%84cogroup%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/"/>
-    <id>https://www.ggstu.com/2018/09/10/Spark中transformation的cogroup算子的使用（Java代码）/</id>
-    <published>2018-09-10T02:13:04.000Z</published>
-    <updated>2018-09-10T02:55:31.515Z</updated>
-    
-    <content type="html"><![CDATA[<p>在spark官方文档中，对cogroup算子的描述如下所示<br><img src="http://pd8lpasbc.bkt.clouddn.com/65-1.png" width="100%" height="100%"><br>在类型为(K,V)和(K,W)的RDD上调用，返回一个(K,(Iterable&lt;V>,Iterable&lt;W>))类型的RDD<br><a id="more"></a><br>例如：已知两个序列，(学号,姓名)，(学号,成绩)，这里同一个学生有多门成绩，打印出每个学生姓名对应的成绩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import org.apache.spark.SparkConf;</span><br><span class="line">import org.apache.spark.api.java.JavaPairRDD;</span><br><span class="line">import org.apache.spark.api.java.JavaSparkContext;</span><br><span class="line">import org.apache.spark.api.java.function.VoidFunction;</span><br><span class="line"></span><br><span class="line">import scala.Tuple2;</span><br><span class="line"></span><br><span class="line">public class CogroupTest &#123;</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">SparkConf conf = new SparkConf()</span><br><span class="line">.setAppName(&quot;CogroupTest&quot;)</span><br><span class="line">.setMaster(&quot;local&quot;);</span><br><span class="line"></span><br><span class="line">JavaSparkContext sc = new JavaSparkContext(conf);</span><br><span class="line"></span><br><span class="line">List&lt;Tuple2&lt;Integer, String&gt;&gt; nameList = Arrays.asList(</span><br><span class="line">new Tuple2&lt;Integer, String&gt;(1, &quot;Tom&quot;),</span><br><span class="line">new Tuple2&lt;Integer, String&gt;(2, &quot;Bob&quot;),</span><br><span class="line">new Tuple2&lt;Integer, String&gt;(3, &quot;Alice&quot;)</span><br><span class="line">);</span><br><span class="line">List&lt;Tuple2&lt;Integer, Integer&gt;&gt; scoreList = Arrays.asList(</span><br><span class="line">new Tuple2&lt;Integer, Integer&gt;(1, 80),</span><br><span class="line">new Tuple2&lt;Integer, Integer&gt;(1, 81),</span><br><span class="line">new Tuple2&lt;Integer, Integer&gt;(1, 82),</span><br><span class="line">new Tuple2&lt;Integer, Integer&gt;(2, 90),</span><br><span class="line">new Tuple2&lt;Integer, Integer&gt;(2, 92),</span><br><span class="line">new Tuple2&lt;Integer, Integer&gt;(2, 94),</span><br><span class="line">new Tuple2&lt;Integer, Integer&gt;(3, 60),</span><br><span class="line">new Tuple2&lt;Integer, Integer&gt;(3, 70),</span><br><span class="line">new Tuple2&lt;Integer, Integer&gt;(3, 80)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">JavaPairRDD&lt;Integer, String&gt; names = sc.parallelizePairs(nameList);</span><br><span class="line">JavaPairRDD&lt;Integer, Integer&gt; scores = sc.parallelizePairs(scoreList);</span><br><span class="line"></span><br><span class="line">JavaPairRDD&lt;Integer, Tuple2&lt;Iterable&lt;String&gt;, Iterable&lt;Integer&gt;&gt;&gt; studentScore = names.cogroup(scores);</span><br><span class="line"></span><br><span class="line">studentScore.foreach(new VoidFunction&lt;Tuple2&lt;Integer,Tuple2&lt;Iterable&lt;String&gt;,Iterable&lt;Integer&gt;&gt;&gt;&gt;() &#123;</span><br><span class="line">private static final long serialVersionUID = 1L;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void call(Tuple2&lt;Integer, Tuple2&lt;Iterable&lt;String&gt;, Iterable&lt;Integer&gt;&gt;&gt; t) throws Exception &#123;</span><br><span class="line">System.out.println(&quot;ID:&quot;+t._1+ &quot;\t&quot; +&quot;Name:&quot;+t._2._1+ &quot;\t&quot; +&quot;Score:&quot;+t._2._2);</span><br><span class="line">System.out.println(&quot;*****************************************&quot;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">sc.close();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地IDE执行后，得到如下结果，即，使用cogroup打印出每个学生姓名对应的多门成绩<br><img src="http://pd8lpasbc.bkt.clouddn.com/65-2.png" width="60%" height="60%"><br>同样的例子，如果使用join算子进行操作，得到如下结果<br><img src="http://pd8lpasbc.bkt.clouddn.com/65-3.png" width="60%" height="60%"><br>这里就能明显的看出join算子和cogroup算子的区别<br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在spark官方文档中，对cogroup算子的描述如下所示&lt;br&gt;&lt;img src=&quot;http://pd8lpasbc.bkt.clouddn.com/65-1.png&quot; width=&quot;100%&quot; height=&quot;100%&quot;&gt;&lt;br&gt;在类型为(K,V)和(K,W)的RDD上调用，返回一个(K,(Iterable&amp;lt;V&gt;,Iterable&amp;lt;W&gt;))类型的RDD&lt;br&gt;
-    
-    </summary>
-    
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
-    
-    
-      <category term="Java" scheme="https://www.ggstu.com/tags/Java/"/>
     
       <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
     
