@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.ggstu.com/"/>
-  <updated>2018-09-17T08:33:42.313Z</updated>
+  <updated>2018-09-17T12:40:38.678Z</updated>
   <id>https://www.ggstu.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spark中RDD的检查点(Checkpoint)机制</title>
+    <link href="https://www.ggstu.com/2018/09/17/Spark%E4%B8%ADRDD%E7%9A%84%E6%A3%80%E6%9F%A5%E7%82%B9-Checkpoint-%E6%9C%BA%E5%88%B6/"/>
+    <id>https://www.ggstu.com/2018/09/17/Spark中RDD的检查点-Checkpoint-机制/</id>
+    <published>2018-09-17T11:34:02.000Z</published>
+    <updated>2018-09-17T12:40:38.678Z</updated>
+    
+    <content type="html"><![CDATA[<p>RDD的检查点机制的本质是将RDD写入磁盘作为检查点，是为了避免缓存丢失重新计算带来的开销，或者lineage(血统)过长而计算时间过长造成容错成本过高。这样就不如在中间阶段做检查点容错，如果之后有结点出现问题而丢失分区，那么可以从做检查点的RDD开始重做lineage，进而可以减少开销。</p><p>设置checkpoint的目录，可以是本地目录，也可以是HDFS上的目录。一般是在具有容错能力，高可靠的文件系统上（比如HDFS、S3等）设置一个检查点路径，用于保存检查点数据。<br><a id="more"></a><br>例如：设置检查点目录为本地目录<br>我在桌面创建了个名为checkpoint的目录作为检查点目录</p><p>Java代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import org.apache.spark.SparkConf;</span><br><span class="line">import org.apache.spark.api.java.JavaRDD;</span><br><span class="line">import org.apache.spark.api.java.JavaSparkContext;</span><br><span class="line"></span><br><span class="line">public class CheckpointTest &#123;</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">SparkConf conf = new SparkConf()</span><br><span class="line">.setAppName(&quot;CheckpointTest&quot;)</span><br><span class="line">.setMaster(&quot;local&quot;);</span><br><span class="line"></span><br><span class="line">JavaSparkContext sc = new JavaSparkContext(conf);</span><br><span class="line"></span><br><span class="line">//设置检查点目录</span><br><span class="line">sc.setCheckpointDir(&quot;C://Users//asus//Desktop//checkpoint&quot;);</span><br><span class="line"></span><br><span class="line">List&lt;Integer&gt; numberList = Arrays.asList(1,2,3,4,5);</span><br><span class="line"></span><br><span class="line">JavaRDD&lt;Integer&gt; numbers = sc.parallelize(numberList);</span><br><span class="line"></span><br><span class="line">//设置rdd的检查点</span><br><span class="line">numbers.checkpoint();</span><br><span class="line"></span><br><span class="line">//一旦触发action操作，就会在检查点目录下生成检查点</span><br><span class="line">numbers.count();</span><br><span class="line"></span><br><span class="line">sc.close();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地IDE运行完成后，在检查点目录checkpoint下会生成一个文件夹，文件夹下的内容如下所示<br><img src="http://pd8lpasbc.bkt.clouddn.com/91-1.png" width="100%" height="100%"><br><br><br>Scala代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.spark.SparkConf</span><br><span class="line">import org.apache.spark.SparkContext</span><br><span class="line"></span><br><span class="line">object CheckpointTest &#123;</span><br><span class="line">  def main(args:Array[String])&#123;</span><br><span class="line">    val conf = new SparkConf()</span><br><span class="line">        .setAppName(&quot;CheckpointTest&quot;)</span><br><span class="line">        .setMaster(&quot;local&quot;)</span><br><span class="line">        </span><br><span class="line">    val sc = new SparkContext(conf)</span><br><span class="line">    </span><br><span class="line">    sc.setCheckpointDir(&quot;C://Users//asus//Desktop//checkpoint&quot;)</span><br><span class="line">    </span><br><span class="line">    val numberArray = Array(1,2,3,4,5)</span><br><span class="line">    </span><br><span class="line">    val numbers = sc.parallelize(numberArray)</span><br><span class="line">    </span><br><span class="line">    numbers.checkpoint</span><br><span class="line">    </span><br><span class="line">    numbers.count</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地Scala IDE运行后，同样得到如上结果</p><p>若要将检查点目录设置成HDFS上的目录，将上面代码的本地目录改成HDFS的目录即可。<br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;RDD的检查点机制的本质是将RDD写入磁盘作为检查点，是为了避免缓存丢失重新计算带来的开销，或者lineage(血统)过长而计算时间过长造成容错成本过高。这样就不如在中间阶段做检查点容错，如果之后有结点出现问题而丢失分区，那么可以从做检查点的RDD开始重做lineage，进而可以减少开销。&lt;/p&gt;
+&lt;p&gt;设置checkpoint的目录，可以是本地目录，也可以是HDFS上的目录。一般是在具有容错能力，高可靠的文件系统上（比如HDFS、S3等）设置一个检查点路径，用于保存检查点数据。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+    
+    
+      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
+    
+  </entry>
   
   <entry>
     <title>Spark中RDD的依赖关系以及stage划分</title>
@@ -461,30 +484,6 @@
     
     
       <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
-    
-      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spark中action的count算子的使用（Java代码）</title>
-    <link href="https://www.ggstu.com/2018/09/12/Spark%E4%B8%ADaction%E7%9A%84count%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/"/>
-    <id>https://www.ggstu.com/2018/09/12/Spark中action的count算子的使用（Java代码）/</id>
-    <published>2018-09-12T04:24:15.000Z</published>
-    <updated>2018-09-12T04:38:58.256Z</updated>
-    
-    <content type="html"><![CDATA[<p>在spark官方文档中，对count算子的描述如下所示<br><img src="http://pd8lpasbc.bkt.clouddn.com/71-1.png" width="90%" height="90%"><br>返回RDD的元素个数<br><a id="more"></a><br>例如：获取集合元素总数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import org.apache.spark.SparkConf;</span><br><span class="line">import org.apache.spark.api.java.JavaRDD;</span><br><span class="line">import org.apache.spark.api.java.JavaSparkContext;</span><br><span class="line"></span><br><span class="line">public class CountTest &#123;</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">SparkConf conf = new SparkConf()</span><br><span class="line">.setAppName(&quot;CountTest&quot;)</span><br><span class="line">.setMaster(&quot;local&quot;);</span><br><span class="line"></span><br><span class="line">JavaSparkContext sc = new JavaSparkContext(conf);</span><br><span class="line"></span><br><span class="line">List&lt;Integer&gt; numberList = Arrays.asList(1,2,3,4,5,6,7,8,9,10);</span><br><span class="line"></span><br><span class="line">JavaRDD&lt;Integer&gt; numbers = sc.parallelize(numberList);</span><br><span class="line"></span><br><span class="line">long count = numbers.count();</span><br><span class="line"></span><br><span class="line">System.out.println(&quot;There are &quot; + count + &quot; numbers.&quot;);</span><br><span class="line"></span><br><span class="line">sc.close();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地IDE执行后，得到如下结果，即，使用count算子获取集合元素总数<br><img src="http://pd8lpasbc.bkt.clouddn.com/71-2.png" width="50%" height="50%"><br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在spark官方文档中，对count算子的描述如下所示&lt;br&gt;&lt;img src=&quot;http://pd8lpasbc.bkt.clouddn.com/71-1.png&quot; width=&quot;90%&quot; height=&quot;90%&quot;&gt;&lt;br&gt;返回RDD的元素个数&lt;br&gt;
-    
-    </summary>
-    
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
-    
-    
-      <category term="Java" scheme="https://www.ggstu.com/tags/Java/"/>
     
       <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
     

@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://www.ggstu.com/2018/09/17/Spark%E4%B8%ADRDD%E7%9A%84%E6%A3%80%E6%9F%A5%E7%82%B9-Checkpoint-%E6%9C%BA%E5%88%B6/</loc>
+    <lastmod>2018-09-17T12:40:38.678Z</lastmod>
+    <data>
+        <display>
+        <title>Spark中RDD的检查点(Checkpoint)机制</title>
+        <pubTime>2018-09-17T11:34:02.000Z</pubTime>
+        
+        <tag>Spark</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术文章" url="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://www.ggstu.com/2018/09/17/Spark%E4%B8%ADRDD%E7%9A%84%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%E4%BB%A5%E5%8F%8Astage%E5%88%92%E5%88%86/</loc>
     <lastmod>2018-09-17T08:33:42.313Z</lastmod>
     <data>
