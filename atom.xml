@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.ggstu.com/"/>
-  <updated>2018-09-25T01:55:48.020Z</updated>
+  <updated>2018-09-26T12:50:46.480Z</updated>
   <id>https://www.ggstu.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spark SQL之创建Datasets</title>
+    <link href="https://www.ggstu.com/2018/09/26/Spark-SQL%E4%B9%8B%E5%88%9B%E5%BB%BADatasets/"/>
+    <id>https://www.ggstu.com/2018/09/26/Spark-SQL之创建Datasets/</id>
+    <published>2018-09-26T13:27:52.000Z</published>
+    <updated>2018-09-26T12:50:46.480Z</updated>
+    
+    <content type="html"><![CDATA[<p>DataFrame的引入，可以让Spark更好的处理结构数据的计算，但其中一个主要的问题是：缺乏编译时类型安全。为了解决这个问题，Spark采用新的Dataset API（DataFrame API的类型扩展）。</p><p>Dataset是分布式数据集合。Dataset是Spark 1.6中添加的一个接口，兼顾了RDD的优点（强类型化，使用功能强大的lambda函数）以及Spark SQL优化后的执行引擎的优点。<br><a id="more"></a><br><img src="http://pd8lpasbc.bkt.clouddn.com/97-1.png" width="70%" height="70%"><br><br></p><p><font size="4"><b>创建Dataset</b></font><br><b>方式一：使用序列</b><br>Scala代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.spark.sql.SparkSession</span><br><span class="line"></span><br><span class="line">//定义case class</span><br><span class="line">case class StudentInfo(id: Int, name: String, age: Int)</span><br><span class="line"></span><br><span class="line">object CreateDatasetSeq &#123;</span><br><span class="line">  def main(args: Array[String]) &#123;</span><br><span class="line">    val spark = SparkSession</span><br><span class="line">      .builder</span><br><span class="line">      .appName(&quot;CreateDatasetSeq&quot;)</span><br><span class="line">      .master(&quot;local&quot;)</span><br><span class="line">      .getOrCreate</span><br><span class="line"></span><br><span class="line">    import spark.implicits._</span><br><span class="line"></span><br><span class="line">    //生成序列，并创建Dataset</span><br><span class="line">    val ds = Seq(StudentInfo(1, &quot;Tom&quot;, 21), StudentInfo(2, &quot;Bob&quot;, 25), StudentInfo(3, &quot;Alice&quot;, 18)).toDS()</span><br><span class="line"></span><br><span class="line">    ds.show</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地Scala IDE运行后，得到如下结果<br><img src="http://pd8lpasbc.bkt.clouddn.com/97-2.png" width="30%" height="30%"><br><br><br><b>方式二：使用本地文件或HDFS数据</b><br>这里以本地JSON为例<br>在桌面创建个JSON文件StudentInfo.json，文件内容如下所示<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;id&quot;:1, &quot;name&quot;:&quot;Tom&quot;, &quot;age&quot;:21&#125;</span><br><span class="line">&#123;&quot;id&quot;:2, &quot;name&quot;:&quot;Bob&quot;, &quot;age&quot;:25&#125;</span><br><span class="line">&#123;&quot;id&quot;:3, &quot;name&quot;:&quot;Alice&quot;, &quot;age&quot;:18&#125;</span><br></pre></td></tr></table></figure></p><p>Scala代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.spark.sql.SparkSession</span><br><span class="line"></span><br><span class="line">//定义case class</span><br><span class="line">case class StudentInfo(id: Long, name: String, age: Long)</span><br><span class="line"></span><br><span class="line">object CreateDatasetJSON &#123;</span><br><span class="line">  def main(args: Array[String]) &#123;</span><br><span class="line">    val spark = SparkSession</span><br><span class="line">      .builder()</span><br><span class="line">      .appName(&quot;CreateDatasetJSON&quot;)</span><br><span class="line">      .master(&quot;local&quot;)</span><br><span class="line">      .getOrCreate</span><br><span class="line"></span><br><span class="line">    import spark.implicits._</span><br><span class="line"></span><br><span class="line">    //通过JSON数据生成DataFrame</span><br><span class="line">    val df = spark.read.json(&quot;C://Users//asus//Desktop//StudentInfo.json&quot;)</span><br><span class="line"></span><br><span class="line">    //将DataFrame转换成Dataset</span><br><span class="line">    df.as[StudentInfo].show</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地Scala IDE运行后，得到如下结果<br><img src="http://pd8lpasbc.bkt.clouddn.com/97-3.png" width="30%" height="30%"><br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;DataFrame的引入，可以让Spark更好的处理结构数据的计算，但其中一个主要的问题是：缺乏编译时类型安全。为了解决这个问题，Spark采用新的Dataset API（DataFrame API的类型扩展）。&lt;/p&gt;
+&lt;p&gt;Dataset是分布式数据集合。Dataset是Spark 1.6中添加的一个接口，兼顾了RDD的优点（强类型化，使用功能强大的lambda函数）以及Spark SQL优化后的执行引擎的优点。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+    
+    
+      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
+    
+  </entry>
   
   <entry>
     <title>Spark SQL之DataFrame的操作</title>
@@ -89,9 +112,9 @@
     <link href="https://www.ggstu.com/2018/09/20/Spark-SQL%E7%AE%80%E4%BB%8B/"/>
     <id>https://www.ggstu.com/2018/09/20/Spark-SQL简介/</id>
     <published>2018-09-20T11:38:57.000Z</published>
-    <updated>2018-09-20T14:12:39.221Z</updated>
+    <updated>2018-09-25T13:54:24.676Z</updated>
     
-    <content type="html"><![CDATA[<p><font size="4"><b>概述</b></font><br>Spark SQL是Apache Spark用来处理结构化数据的一个模块。它起着分布式SQL查询引擎的作用。</p><p>其实最早使用的都是Hadoop自己的Hive查询引擎，Hive的诞生，主要是为了让那些不熟悉Java，无法深入进行MapReduce编程的数据分析师，能够使用他们熟悉的关系型数据库的SQL模型来操作HDFS上的数据。由于Hive底层基于MapReduce，而MapReduce这种计算模型执行效率比较慢，所以在Spark 1.0版本开始推出了Spark SQL。<br><a id="more"></a><br><img src="http://pd8lpasbc.bkt.clouddn.com/93-1.png" width="95%" height="95%"><br><br></p><p><font size="4"><b>Spark SQL的特点</b></font><br><b>容易整合</b><br><img src="http://pd8lpasbc.bkt.clouddn.com/93-2.png" width="95%" height="95%"><br><b>统一的数据访问方式</b><br><img src="http://pd8lpasbc.bkt.clouddn.com/93-3.png" width="95%" height="95%"><br><b>兼容Hive</b><br><img src="http://pd8lpasbc.bkt.clouddn.com/93-4.png" width="95%" height="95%"><br><b>标准的数据连接</b><br><img src="http://pd8lpasbc.bkt.clouddn.com/93-5.png" width="95%" height="95%"><br><br></p><p><font size="4"><b>Datasets和DataFrames</b></font><br>DataSet是分布式数据集合。Dataset是Spark 1.6中添加的一个接口，是DataFrame上更高一级的抽象。它提供了RDD的优点（强类型化，使用强大的lambda函数的能力）以及Spark SQL优化后的执行引擎的优点。一个Dataset可以从JVM对象构造，然后使用函数转换(map,flatMap,filter等)去操作。Dataset API支持的语言有Scala和Java。</p><p>DataFrame是组织成指定列的DataSet。它在概念上等同于关系型数据库中的表，但在底层具有更丰富的优化。创建DataFrame的来源有多种，例如：结构化数据文件，Hive中的表，外部数据库或现有RDD。DataFrame API支持的语言有Scala，Java，Python和R。<br><img src="http://pd8lpasbc.bkt.clouddn.com/93-6.png" width="70%" height="70%"><br>从上图可以看出，DataFrame多了数据的结构信息，即schema。RDD是分布式的Java对象的集合。DataFrame是分布式的Row对象的集合。DataFrame除了提供了比RDD更丰富的算子以外，更重要的特点是提升执行效率、减少数据读取、执行计划的优化。<br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
+    <content type="html"><![CDATA[<p><font size="4"><b>概述</b></font><br>Spark SQL是Apache Spark用来处理结构化数据的一个模块。它起着分布式SQL查询引擎的作用。</p><p>其实最早使用的都是Hadoop自己的Hive查询引擎，Hive的诞生，主要是为了让那些不熟悉Java，无法深入进行MapReduce编程的数据分析师，能够使用他们熟悉的关系型数据库的SQL模型来操作HDFS上的数据。由于Hive底层基于MapReduce，而MapReduce这种计算模型执行效率比较慢，所以在Spark 1.0版本开始推出了Spark SQL。<br><a id="more"></a><br><img src="http://pd8lpasbc.bkt.clouddn.com/93-1.png" width="95%" height="95%"><br><br></p><p><font size="4"><b>Spark SQL的特点</b></font><br><b>容易整合</b><br><img src="http://pd8lpasbc.bkt.clouddn.com/93-2.png" width="95%" height="95%"><br><b>统一的数据访问方式</b><br><img src="http://pd8lpasbc.bkt.clouddn.com/93-3.png" width="95%" height="95%"><br><b>兼容Hive</b><br><img src="http://pd8lpasbc.bkt.clouddn.com/93-4.png" width="95%" height="95%"><br><b>标准的数据连接</b><br><img src="http://pd8lpasbc.bkt.clouddn.com/93-5.png" width="95%" height="95%"><br><br></p><p><font size="4"><b>Datasets和DataFrames</b></font><br>Dataset是分布式数据集合。Dataset是Spark 1.6中添加的一个接口，是DataFrame上更高一级的抽象。它提供了RDD的优点（强类型化，使用强大的lambda函数的能力）以及Spark SQL优化后的执行引擎的优点。一个Dataset可以从JVM对象构造，然后使用函数转换(map,flatMap,filter等)去操作。Dataset API支持的语言有Scala和Java。</p><p>DataFrame是组织成指定列的Dataset。它在概念上等同于关系型数据库中的表，但在底层具有更丰富的优化。创建DataFrame的来源有多种，例如：结构化数据文件，Hive中的表，外部数据库或现有RDD。DataFrame API支持的语言有Scala，Java，Python和R。<br><img src="http://pd8lpasbc.bkt.clouddn.com/93-6.png" width="70%" height="70%"><br>从上图可以看出，DataFrame多了数据的结构信息，即schema。RDD是分布式的Java对象的集合。DataFrame是分布式的Row对象的集合。DataFrame除了提供了比RDD更丰富的算子以外，更重要的特点是提升执行效率、减少数据读取、执行计划的优化。<br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
     
     <summary type="html">
     
@@ -454,30 +477,6 @@
     
     
       <category term="Scala" scheme="https://www.ggstu.com/tags/Scala/"/>
-    
-      <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spark中action的countByKey算子的使用（Java代码）</title>
-    <link href="https://www.ggstu.com/2018/09/13/Spark%E4%B8%ADaction%E7%9A%84countByKey%E7%AE%97%E5%AD%90%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%88Java%E4%BB%A3%E7%A0%81%EF%BC%89/"/>
-    <id>https://www.ggstu.com/2018/09/13/Spark中action的countByKey算子的使用（Java代码）/</id>
-    <published>2018-09-13T00:09:19.000Z</published>
-    <updated>2018-09-13T00:42:00.445Z</updated>
-    
-    <content type="html"><![CDATA[<p>在spark官方文档中，对countByKey算子的描述如下所示<br><img src="http://pd8lpasbc.bkt.clouddn.com/77-1.png" width="100%" height="100%"><br>针对(K,V)类型的RDD，返回一个(K,Int)的map，表示每一个key对应的元素个数<br><a id="more"></a><br>例如：统计每个学生有几门课程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">import org.apache.spark.SparkConf;</span><br><span class="line">import org.apache.spark.api.java.JavaPairRDD;</span><br><span class="line">import org.apache.spark.api.java.JavaSparkContext;</span><br><span class="line"></span><br><span class="line">import scala.Tuple2;</span><br><span class="line"></span><br><span class="line">public class CountByKeyTest &#123;</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">SparkConf conf = new SparkConf()</span><br><span class="line">.setAppName(&quot;CountByKeyTest&quot;)</span><br><span class="line">.setMaster(&quot;local&quot;);</span><br><span class="line"></span><br><span class="line">JavaSparkContext sc = new JavaSparkContext(conf);</span><br><span class="line"></span><br><span class="line">List&lt;Tuple2&lt;String, String&gt;&gt; courseList = Arrays.asList(</span><br><span class="line">new Tuple2&lt;String, String&gt;(&quot;Tom&quot;, &quot;Physics&quot;),</span><br><span class="line">new Tuple2&lt;String, String&gt;(&quot;Tom&quot;, &quot;Maths&quot;),</span><br><span class="line">new Tuple2&lt;String, String&gt;(&quot;Bob&quot;, &quot;English&quot;),</span><br><span class="line">new Tuple2&lt;String, String&gt;(&quot;Bob&quot;, &quot;Science&quot;),</span><br><span class="line">new Tuple2&lt;String, String&gt;(&quot;Bob&quot;, &quot;Chemistry&quot;)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">JavaPairRDD&lt;String, String&gt; courses = sc.parallelizePairs(courseList);</span><br><span class="line"></span><br><span class="line">Map&lt;String, Long&gt; courseCounts = courses.countByKey();</span><br><span class="line"></span><br><span class="line">System.out.println(courseCounts);</span><br><span class="line">for(Map.Entry&lt;String, Long&gt; count : courseCounts.entrySet()) &#123;</span><br><span class="line">System.out.println(&quot;Name: &quot; + count.getKey() + &quot;\t&quot; + &quot;Course: &quot; + count.getValue());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sc.close();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>在本地IDE执行后，得到如下结果，即，使用countByKey算子统计每个学生有几门课程<br><img src="http://pd8lpasbc.bkt.clouddn.com/77-2.png" width="50%" height="50%"><br><br><br>本文均为<font color="#f00">原创</font>，如需转载请注明链接<a href="http://www.ggstu.com">http://www.ggstu.com</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在spark官方文档中，对countByKey算子的描述如下所示&lt;br&gt;&lt;img src=&quot;http://pd8lpasbc.bkt.clouddn.com/77-1.png&quot; width=&quot;100%&quot; height=&quot;100%&quot;&gt;&lt;br&gt;针对(K,V)类型的RDD，返回一个(K,Int)的map，表示每一个key对应的元素个数&lt;br&gt;
-    
-    </summary>
-    
-      <category term="技术文章" scheme="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
-    
-    
-      <category term="Java" scheme="https://www.ggstu.com/tags/Java/"/>
     
       <category term="Spark" scheme="https://www.ggstu.com/tags/Spark/"/>
     
