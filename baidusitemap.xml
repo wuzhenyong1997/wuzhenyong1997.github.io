@@ -4,12 +4,12 @@
 
     
   <url>
-    <loc>https://www.ggstu.com/2018/09/26/Spark-SQL%E4%B9%8B%E5%88%9B%E5%BB%BADatasets/</loc>
-    <lastmod>2018-09-26T12:50:46.480Z</lastmod>
+    <loc>https://www.ggstu.com/2018/09/28/Spark-SQL%E4%B9%8B%E5%B0%86RDD%E8%BD%AC%E6%8D%A2%E6%88%90Datasets%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/</loc>
+    <lastmod>2018-09-28T04:13:20.779Z</lastmod>
     <data>
         <display>
-        <title>Spark SQL之创建Datasets</title>
-        <pubTime>2018-09-26T13:27:52.000Z</pubTime>
+        <title>Spark SQL之将RDD转换成Datasets的两种方式</title>
+        <pubTime>2018-09-28T13:10:24.000Z</pubTime>
         
         <tag>Spark</tag>
          
@@ -25,7 +25,7 @@
     
   <url>
     <loc>https://www.ggstu.com/2018/09/20/Spark-SQL%E7%AE%80%E4%BB%8B/</loc>
-    <lastmod>2018-09-25T13:54:24.676Z</lastmod>
+    <lastmod>2018-09-28T01:16:09.546Z</lastmod>
     <data>
         <display>
         <title>Spark SQL简介</title>
@@ -45,11 +45,31 @@
     
   <url>
     <loc>https://www.ggstu.com/2018/09/24/Spark-SQL%E4%B9%8BDataFrame%E7%9A%84%E6%93%8D%E4%BD%9C/</loc>
-    <lastmod>2018-09-25T01:55:48.020Z</lastmod>
+    <lastmod>2018-09-28T00:50:23.898Z</lastmod>
     <data>
         <display>
         <title>Spark SQL之DataFrame的操作</title>
         <pubTime>2018-09-24T15:10:28.000Z</pubTime>
+        
+        <tag>Spark</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术文章" url="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://www.ggstu.com/2018/09/26/Spark-SQL%E4%B9%8B%E5%88%9B%E5%BB%BADatasets/</loc>
+    <lastmod>2018-09-26T12:50:46.480Z</lastmod>
+    <data>
+        <display>
+        <title>Spark SQL之创建Datasets</title>
+        <pubTime>2018-09-26T13:27:52.000Z</pubTime>
         
         <tag>Spark</tag>
          
