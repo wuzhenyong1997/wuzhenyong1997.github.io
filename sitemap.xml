@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.ggstu.com/2018/09/29/Spark-SQL%E4%B8%AD%E7%9A%84Parquet%E6%95%B0%E6%8D%AE%E6%BA%90/</loc>
+    
+    <lastmod>2018-09-29T10:39:10.391Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.ggstu.com/2018/09/28/Spark-SQL%E4%B9%8B%E9%80%9A%E7%94%A8%E7%9A%84Load-Save%E6%93%8D%E4%BD%9C/</loc>
     
     <lastmod>2018-09-28T12:50:39.619Z</lastmod>
