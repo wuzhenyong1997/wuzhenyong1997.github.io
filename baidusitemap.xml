@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://www.ggstu.com/2018/09/30/Spark-SQL%E4%B8%AD%E7%9A%84JSON%E6%95%B0%E6%8D%AE%E6%BA%90/</loc>
+    <lastmod>2018-09-30T04:34:52.715Z</lastmod>
+    <data>
+        <display>
+        <title>Spark SQL中的JSON数据源</title>
+        <pubTime>2018-09-29T23:59:08.000Z</pubTime>
+        
+        <tag>Spark</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术文章" url="https://www.ggstu.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://www.ggstu.com/2018/09/29/Spark-SQL%E4%B8%AD%E7%9A%84Parquet%E6%95%B0%E6%8D%AE%E6%BA%90/</loc>
     <lastmod>2018-09-29T10:39:10.391Z</lastmod>
     <data>
@@ -1412,9 +1432,9 @@
         <title>Linux下（CentOS7）安装与配置JDK1.8（上传安装方式）</title>
         <pubTime>2018-08-30T03:31:05.000Z</pubTime>
         
-        <tag>Java</tag>
-         
         <tag>Linux</tag>
+         
+        <tag>Java</tag>
          
          
            
@@ -1434,9 +1454,9 @@
         <title>Linux下（CentOS7）安装与配置JDK1.8（wget命令安装方式）</title>
         <pubTime>2018-08-30T02:13:31.000Z</pubTime>
         
-        <tag>Java</tag>
-         
         <tag>Linux</tag>
+         
+        <tag>Java</tag>
          
          
            
