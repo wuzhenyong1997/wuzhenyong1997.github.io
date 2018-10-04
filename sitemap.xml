@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.ggstu.com/2018/10/04/Spark-SQL%E4%B8%AD%E7%9A%84Hive%E6%95%B0%E6%8D%AE%E6%BA%90/</loc>
+    
+    <lastmod>2018-10-04T04:29:36.190Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.ggstu.com/2018/09/30/Spark-SQL%E4%B8%AD%E7%9A%84JSON%E6%95%B0%E6%8D%AE%E6%BA%90/</loc>
     
     <lastmod>2018-09-30T04:34:52.715Z</lastmod>
